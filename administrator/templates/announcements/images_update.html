@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}  
+{% block title %} 
+<title> Home | Search Hotel </title> 
+{% endblock %}
+{% load static %}
+
+
+{% block style %} 
+<link rel="stylesheet" type="text/css" href="{% static 'style/announcements.css' %}">
+{% endblock %}
+
+
+
+{% block content %}
+<style type="text/css">
+
+@media screen and (max-width: 767px) {
+.menu_style{
+  width: 100%;
+}
+
+.profile_style{
+  display: none;
+}
+
+}
+
+</style>
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- HEADER ************************************************************** -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<header style="border-radius: 0px;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm p-3 bg-body rounded-start">
+    <div class="container-fluid">
+      <a class="navbar-brand landing-brand account_text" href="{% url 'account' %}">
+        <i class="fas fa-key account_logatip"></i>
+      <!-- <img class="mb-1" src="{% static 'images/logo.png' %}" alt="" width="40" height="40"> -->
+      House 
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <!-- **************************** -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+             
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+      <li class="nav-item account_menu_text18"><a class="nav-link" aria-current="page" href="{% url 'account' %}">Qidiruv</a>
+      </li>
+
+        <li class="nav-item account_menu_text18"><a class="nav-link active" aria-current="page" href="{% url 'announcement' %}">E'lonlar</a>
+        </li>
+
+        {% if request.user.householder.householder_image != "" %}
+        <li class="nav-item profile_style"><a class="nav-link active" aria-current="page" href="{% url 'announcement' %}" style="margin-right: 0; padding-right: 0px;"><img src="{{request.user.householder.householder_image.url}}" alt="mdo" width="32" height="32" class="rounded-circle"></a>
+        </li>
+        {% else %}
+        <li class="nav-item profile_style"><a class="nav-link active" aria-current="page" href="{% url 'announcement' %}" style="margin-right: 0; padding-right: 0px;"><i class="fas fa-user-circle account_logatip"></i></a>
+        </li>
+        {% endif %}
+
+
+      <li class="nav-item dropdown ms-auto account_menu_text18 menu_style"> 
+       
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <font class="fw-normal" color="black"> {{request.user.last_name}} {{request.user.first_name}}</font></a>
+
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="z-index: 2; font-size: 18px;">
+          <li><a class="dropdown-item baxodir_account_standart_text_bold" href="{% url 'settings' %}"><i class="fas fa-user-circle account_logotip_color"></i> Hisob sozlamalari</a></li>
+
+          <li><a class="dropdown-item" href="#"><i class="fab fa-gratipay account_logotip_color"></i> Uy yoqdi</a></li>
+
+          <li><a class="dropdown-item" href=""><i class="fas fa-question-circle account_logotip_color"></i> Yordam</a></li>
+
+          <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt account_logotip_color"></i> Tizimdan chiqish</a></li>
+
+        </ul>
+
+    </li>
+    </ul>
+
+  </div>    
+  </div>
+  </nav>
+</header>
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- END HEADER ********************************************************** -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+  
+
+
+
+
+
+<div class="header mt-5">
+<div class="container-fluid">
+<div class="container">
+<div class="header-body">
+<div class="row align-items-end">
+<div class="col">
+<h3 class="header-title" style="font-family: 'Baloo Chettan 2', cursive; font-size: 25px;">
+  Uy suratlarni yangilash
+</h3>
+ </div>
+<div class="col-auto">
+
+</div>
+</div> 
+</div> 
+<hr style="background: rgb(148,152,161);">
+</div>
+</div>
+</div>
+
+
+
+
+
+<div class="container-fluid mb-5">
+<div class="container">
+<div class="row">
+
+<div class="col-lg-12">
+
+<form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+
+{{ formset|crispy }}
+
+<br>
+<button type="submit" class="btn btn-primary">O'zgarishlarni tasdiqlash</button>
+</form>
+
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+

@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %} 
+<title> Home | Search Hotel </title> 
+{% endblock %}
+{% load static %}
+
+
+{% block style %} 
+<link rel="stylesheet" type="text/css" href="{% static 'style/account.css' %}">
+{% endblock %}
+
+
+
+{% block content %}
+{% if user.is_active %}
+<style type="text/css">
+
+
+@media screen and (max-width: 767px) {
+.menu_style{
+  width: 100%;
+}
+
+.profile_style{
+  display: none;
+}
+
+}
+
+</style>
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- HEADER ************************************************************** -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<header style="border-radius: 0px;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm p-3 bg-body rounded-start">
+    <div class="container-fluid">
+      <a class="navbar-brand landing-brand account_text" href="{% url 'home' %}">
+        <i class="fas fa-key account_logatip"></i>
+      <!-- <img class="mb-1" src="{% static 'images/logo.png' %}" alt="" width="40" height="40"> -->
+      Slux.uz  
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <!-- **************************** -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+             
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+      <li class="nav-item account_menu_text18"><a class="nav-link active" aria-current="page" href="{% url 'account' %}">Qidiruv</a>
+      </li>
+
+        <li class="nav-item account_menu_text18"><a class="nav-link active" aria-current="page" href="{% url 'announcement' %}">E'lonlar</a>
+        </li>
+
+        {% if request.user.householder.householder_image != "" %}
+        <li class="nav-item profile_style"><a class="nav-link active" aria-current="page" href="{% url 'announcement' %}" style="margin-right: 0; padding-right: 0px;"><img src="{{request.user.householder.householder_image.url}}" alt="mdo" width="32" height="32" class="rounded-circle"></a>
+        </li>
+        {% else %}
+        <li class="nav-item profile_style"><a class="nav-link active" aria-current="page" href="{% url 'announcement' %}" style="margin-right: 0; padding-right: 0px;"><i class="fas fa-user-circle account_logatip"></i></a>
+        </li>
+        {% endif %}
+
+
+      <li class="nav-item dropdown ms-auto account_menu_text18 menu_style"> 
+       
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <font class="fw-normal" color="black"> {{request.user.last_name}} {{request.user.first_name}}</font></a>
+
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="z-index: 2; font-size: 18px;">
+          <li><a class="dropdown-item baxodir_account_standart_text_bold" href="{% url 'settings' %}"><i class="fas fa-user-circle account_logotip_color"></i> Hisob sozlamalari</a></li>
+
+          <li><a class="dropdown-item" href="#"><i class="fab fa-gratipay account_logotip_color"></i> Uy yoqdi</a></li>
+
+          <li><a class="dropdown-item" href=""><i class="fas fa-question-circle account_logotip_color"></i> Yordam</a></li>
+
+          <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt account_logotip_color"></i> Tizimdan chiqish</a></li>
+
+        </ul>
+
+    </li>
+    </ul>
+
+  </div>    
+  </div>
+  </nav>
+</header>
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- END HEADER ********************************************************** -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+
+
+
+<div class="container-fluid mt-5">
+<div class="container" style="height: 400px;">
+<form method="POST">
+{% csrf_token %}
+
+<div class="row">
+
+<div class="col-lg-12">
+<div class="baxodir_account_card bg-white">
+<div class="baxodir_account_card_header">
+<h5 class="card-title text-danger baxodir_account_standart_text_bold">Hisobingizni butunlay o'chirmoqchimisiz?</h5>
+</div>
+<div class="card-body">
+<h6 class="card-title text-danger baxodir_account_standart_text">Hisobingizni tizimdan butunlay o'chirmoqchimisiz? /Hisobni butunlay tarmoqdan o'chirish tugmasini bosing! </h6>
+
+
+
+<button type="submit" class="btn btn-danger mt-4">Hisobimni o'chirilishini tasdiqlayman</button>
+</div>
+</div>
+</div>
+  
+
+</div>
+</form>
+
+</div>
+</div>
+
+
+
+{% else %}
+<div class="card">
+<div class="card-header">
+www.Slux.uz  404 - xato
+</div>
+<div class="card-body">
+<h5 class="card-title">Slux.uz boot</h5>
+<p class="card-text">Bilishimcha siz bizni tekshirmoqdasiz xafsizligimiz uchun sizning ip malumotingiz serverga yuboriladi</p>
+<a href="{% url 'home' %}" class="btn btn-primary">Bosh sahifaga qaytish</a>
+</div>
+</div>
+{% endif %}
+{% endblock %}
+
+
+
+
+
+
+{% block footer %}
+{% if user.is_active %}
+<footer class="bg-secondary text-center text-white">
+<div class="container p-4">
+<section class="mb-4">
+<a class="btn btn-outline-light btn-floating m-1" href="#" role="button"><i class="fab fa-google-play" style="font-size: 18px;"></i> Google Play</a>
+<a class="btn btn-outline-light btn-floating m-1" href="#" role="button"
+><i class="fab fa-apple" style="font-size: 25px;"></i> App Store</a>
+</section>
+<section class="mb-4">
+<p  style="font-family: 'Baloo Chettan 2', cursive; font-size: 18px;">
+        Tizim: Turizm, Talabalar, va Fuqorolor uchun vaqtinchalik ijaraga uy topish uchun yordamalshadi. Tizimdan foydalanishda sizda muommolar tug'ilsa bizga murojat qilishingiz mumkun. Biz sizga doimo yordam berishdan mamnun bo'lamiz.</p>
+    </section>
+
+<section class="">
+<div class="row">
+<div class="col-lg-3 col-md-6 mb-4 mb-md-0" style="font-family: 'Baloo Chettan 2', cursive;">
+<h6 class="text-uppercase">Bizning hamkorlarimiz</h6>
+<ul class="list-unstyled mb-0">
+<li>
+<a href="#!" class="text-white">iT-Future</a>
+</li>
+<li>
+<a href="#!" class="text-white">House Hotel</a>
+</li>     
+</ul>
+</div>
+<div class="col-lg-3 col-md-6 mb-4 mb-md-0" style="font-family: 'Baloo Chettan 2', cursive;">
+<h6 class="text-uppercase">Biznes takliflar</h6>
+<ul class="list-unstyled mb-0"> 
+<li>
+<a href="tel:{{f.phone_numer}}" class="text-white">+7 (961) 455-99-27</a>
+</li>
+<li>
+<a href="https://t.me/baxodirdavirov1997" class="text-white">@baxodirdavirov1997</a>
+</li>
+</ul>
+</div>
+<div class="col-lg-3 col-md-6 mb-4 mb-md-0" style="font-family: 'Baloo Chettan 2', cursive;">
+<h6 class="text-uppercase">shikoyatlar uchun</h6>
+<ul class="list-unstyled mb-0">
+<li>
+<a href="tel:{{f.phone_numer}}" class="text-white">+7 (961) 455-99-27</a>
+</li>
+<li>
+<a href="https://t.me/baxodirdavirov1997" class="text-white">@baxodirdavirov1997</a>
+</li>
+</ul>
+</div>
+<div class="col-lg-3 col-md-6 mb-4 mb-md-0" style="font-family: 'Baloo Chettan 2', cursive;">
+<h6 class="text-uppercase">Yordam uchun</h6>
+<ul class="list-unstyled mb-0">
+<li>
+<a href="tel:{{f.phone_numer}}" class="text-white">+7 (961) 455-99-27</a>
+</li>
+<li>
+<a href="https://t.me/baxodirdavirov1997" class="text-white">@baxodirdavirov1997</a>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+<div class="text-center p-3" style="font-family: 'Baloo Chettan 2', cursive; background-color: rgba(0, 0, 0, 0.2);">
+    © 2021 Barcha huquqlar himoyalangan
+</div>
+</footer>
+
+
+{% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

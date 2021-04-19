@@ -1,0 +1,439 @@
+{% extends 'administrator/base_admin.html' %}
+
+ {% load static %}
+
+
+
+
+
+{% block elon %}
+<div id="accordion">
+<li class="collapse_list" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+<i class="fas fa-bullhorn"></i></i>
+<span class="text_collapse">E'lonlar</span> </li>
+<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+<ul class="small_menu">
+<a href="{% url 'admin_announcements' %}"><li style="color: #568fed;">E'lonlar</li></a>
+</ul>
+</div>
+</div>
+{% endblock %}
+
+
+
+
+{% block administrator %}
+<div id="accordion">
+<li class="collapse_list" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne"><i class="fas fa-user-shield"></i><span class="text_collapse">Administrator</span> </li>
+<div id="collapseThree" class="collapse"  data-parent="#accordion">
+        
+<ul class="small_menu">
+
+<a href="{% url 'admin_announcers' %}"><li>Hisoblar</li></a>
+
+<a href="{% url 'moderators' %}"><li>Moderatorlar</li></a>
+
+</ul>
+
+</div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- CONTAINER  -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+{% block container %}
+
+<div class="container-fluid">
+  
+
+<form method='POST' action="" enctype="multipart/form-data"> 
+{% csrf_token %}
+
+
+<div class="container-fluid mt-5">
+<div class="container">
+
+  
+<div class="row">
+<div class="col-lg-12">
+<div class="baxodir_account_card bg-white">
+<div class="baxodir_account_card_header">
+<h5 class="card-title text-info baxodir_account_standart_text_bold">Uyingizni qidirib topishlari uchun ma'lumotlarni diqqat bilan to'ldiring</h5>
+</div>
+<div class="card-body">
+
+
+<div class="row">
+    
+
+
+<fieldset class="mt-3">
+<div class="row">
+
+ <!-- Address -->
+    <div class="col-lg-6">
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Uy manzilini kiriting</label>
+    {{ form.address }}
+    </div>
+    </div>
+
+
+  <!-- phone_numer -->
+    <div class="col-lg-6">
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Telefon raqamingizni kiriting</label>
+    {{ form.phone_numer }}
+    </div>
+    </div>
+
+
+</div>
+</fieldset>
+   
+
+
+<fieldset class="mt-5">
+<div class="row">
+
+   <!-- mode -->
+    <div class="col-lg-2">
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Ijaraga berish tartibi</label>
+    {{ form.floor }}
+    </div>
+    </div>
+
+
+
+
+    <!-- mode -->
+    <div class="col-lg-2">
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Xonalar soni</label>
+    {{form.rooms}}
+    <!-- <select name="rooms" class="form-control">
+      <option value="">--Tanlang--</option>
+      {% for r in room %}
+      <option value='{{r.name}}'>{{r.name}}</option>
+      {% endfor %}
+      </select> -->
+    </div>
+    </div>
+
+
+
+    <!-- mode -->
+    <div class="col-lg-2">
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Ijaraga berish tartibi</label>
+    {{ form.mode }}
+    </div>
+    </div>
+
+
+     <!-- kimlar -->
+    <div class="col-lg-2">
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Jinsi / Oila</label>
+    {{ form.kimlar }}
+    </div>
+    </div>
+
+
+ <!-- kishilar -->
+    <div class="col-lg-2">
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Ijarada turuvchi kishilar soni</label>
+    {{ form.kishilar }}
+    </div>
+    </div>
+
+
+ <!-- topshirilgan -->
+    <div class="col-lg-2">
+    <div class="mb-3">
+    <label>Uy holatini ko'rsating</label>
+    {{ form.topshirilgan }}
+    </div>
+    </div>
+
+
+    <div class="col-lg-4">
+    <label for="floatingTextarea">Uyingizdagi tartiblarni kiriting</label>
+    <div class="form-floating">
+   {{form.tartiblar}}
+    </div>
+    </div>
+
+
+
+    <div class="col-lg-4">
+    <label for="floatingTextarea">Ijarachiga ish taklif qila olasizmi? Yozing!</label>
+    <div class="form-floating">
+    {{form.ish}}
+    </div>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-body">
+       
+    <div class="mb-3">
+    <label>Qavatni tanlang</label>
+    {{form.floormany}}
+     <!--  <select id="floormany" name="floormany" class="form-control">
+      <option value="">--Tanlang--</option>
+      {% for f in floors %}
+      <option value='{{f.name}}'>{{f.name}}</option>
+      {% endfor %}
+      </select> -->
+    </div>
+  
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+    <script type="text/javascript">
+      document.getElementById("floor").onchange = function () {
+      document.getElementById("staticBackdrop").setAttribute("disabled", "disabled");
+      if (this.value == "ko'p qavatli")
+        $('#staticBackdrop').modal("show"); //Open Modal
+    };
+    </script>
+
+</div>
+</fieldset>
+
+
+
+
+
+
+ <!-- topshirilgan -->
+  <fieldset class="mt-5">
+  <div class="row">
+  <div class="col-lg-2">
+  <div class="mb-3">
+  <label  class="form-label">Pul.mun tanlang</label>
+  {{form.moneyc}}
+  </div>
+  </div>
+
+  <div class="col-lg-4">   
+  <div class="mb-3">
+  <label  class="form-label">Qiymatni kiriting</label>
+  {{form.money}}
+  </div>
+  </div>
+
+
+
+    </div>  
+  </fieldset>
+
+
+
+
+
+
+
+
+
+
+<!-- /***************************************/* -->
+  <fieldset class="mt-5">
+  <div class="row">
+  <div class="baxodir_account_card_header mt-4">
+  <h5 class="card-title text-info baxodir_account_standart_text_bold">Iste'mol ehtiyojlari</h5>
+  </div>
+  
+  <div class="col-lg-6">
+  <div class="mb-3">
+  <label  class="form-label">Sovuq suv</label>
+  {{form.sovuq_suv}}
+  </div>
+  </div>
+
+  <div class="col-lg-6">
+  <div class="mb-3">
+  <label  class="form-label">Issiq suv</label>
+  {{form.issiq_suv}}
+  </div>
+  </div>
+
+
+  <div class="col-lg-6">
+  <div class="mb-3">
+  <label  class="form-label">Svet</label>
+  {{form.svet}}
+  </div>
+  </div>
+
+  <div class="col-lg-6">
+  <div class="mb-3">
+  <label  class="form-label">Gaz</label>
+  {{form.gaz}}
+  </div>
+  </div>
+
+
+ <div class="col-lg-6">
+    <label for="floatingTextarea">Ijarachiga ish taklif qila olasizmi? Yozing!</label>
+    <div class="form-floating">
+    {{form.additional2}}
+    </div>
+ </div>
+ 
+  </div>  
+  </fieldset>
+  
+
+
+
+
+
+
+
+<!-- /***************************************/* -->
+  <fieldset class="mt-5">
+  <div class="row">
+  <div class="baxodir_account_card_header mt-4">
+  <h5 class="card-title text-info baxodir_account_standart_text_bold">Elektron vositalari</h5>
+  </div>
+  
+  <div class="col-lg-6">
+  <div class="mb-3">
+  <label  class="form-label">Wifi</label>
+  {{form.wifi}}
+  </div>
+  </div>
+
+  <div class="col-lg-6">
+  <div class="mb-3">
+  <label  class="form-label">Sovutgich</label>
+  {{form.sovutgich}}
+  </div>
+  </div>
+
+
+  <div class="col-lg-6">
+  <div class="mb-3">
+  <label  class="form-label">Kondisioner</label>
+  {{form.kondisioner}}
+  </div>
+  </div>
+
+  <div class="col-lg-6">
+  <label for="floatingTextarea">Qo'shimchalar kiriting</label>
+  <div class="form-floating">
+  {{form.additional3}}
+  </div>
+  </div>
+
+  </div>  
+  </fieldset>
+
+
+
+
+
+
+<!-- /***************************************/* -->
+  <fieldset class="mt-5">
+  <div class="row">
+  <div class="baxodir_account_card_header mt-4">
+  <h5 class="card-title text-info baxodir_account_standart_text_bold">Gigiyena sharaoidlar</h5>
+  </div>
+  
+  <div class="col-lg-6">
+  <div class="mb-3">
+  <label  class="form-label">Hojat</label>
+  {{form.hojat}}
+  </div>
+  </div>
+
+  <div class="col-lg-6">
+  <div class="mb-3">
+  <label  class="form-label">Hammom</label>
+  {{form.hammom}}
+  </div>
+  </div>
+
+  <div class="col-lg-6">
+  <label for="floatingTextarea">Qo'shimchalar kiriting</label>
+  <div class="form-floating">
+  {{form.additional4}}
+  </div>
+  </div>
+
+
+
+  </div>  
+  </fieldset>
+
+
+
+<!-- /***************************************/* -->
+  <fieldset class="mt-5">
+  <div class="row">
+  <div class="baxodir_account_card_header mt-4">
+  <h5 class="card-title text-info baxodir_account_standart_text_bold">Xavfsizlik tizimi</h5>
+  </div>
+  
+  <div class="col-lg-6">
+  <div class="mb-3">
+  <label  class="form-label">Xafsizlik chorasi</label>
+  {{form.xafsiz}}
+  </div>
+  </div>
+
+  <div class="col-lg-6">
+  <label for="floatingTextarea">Qo'shimchalar kiriting</label>
+  <div class="form-floating">
+  {{form.additional5}}
+  </div>
+  </div>
+  
+
+  </div>  
+  </fieldset>
+
+
+
+</div>
+
+<button type='submit' class="btn btn-primary m-3">E'lonni saqlash va e'lon qilish</button>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+</form>
+
+</div>
+
+
+{% endblock %}
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- CONTAINER  -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+

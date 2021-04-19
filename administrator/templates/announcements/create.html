@@ -1,0 +1,608 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+<title> Home | Search Hotel </title> 
+{% endblock %}
+{% load static %}
+
+
+{% block style %} 
+<link rel="stylesheet" type="text/css" href="{% static 'style/announcements.css' %}">
+{% endblock %}
+
+
+
+{% block content %}
+<style type="text/css">
+
+@media screen and (max-width: 767px) {
+.menu_style{
+  width: 100%;
+}
+
+.profile_style{
+  display: none;
+}
+
+}
+
+</style>
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- HEADER ************************************************************** -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<header style="border-radius: 0px;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm p-3 bg-body rounded-start">
+    <div class="container-fluid">
+      <a class="navbar-brand landing-brand account_text" href="{% url 'account' %}">
+        <i class="fas fa-key account_logatip"></i>
+      <!-- <img class="mb-1" src="{% static 'images/logo.png' %}" alt="" width="40" height="40"> -->
+      House 
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <!-- **************************** -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+             
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+      <li class="nav-item account_menu_text18"><a class="nav-link" aria-current="page" href="{% url 'account' %}">Qidiruv</a>
+      </li>
+
+        <li class="nav-item account_menu_text18 active"><a class="nav-link active" aria-current="page" href="{% url 'announcement' %}">E'lonlar</a>
+        </li>
+
+        {% if request.user.householder.householder_image != "" %}
+        <li class="nav-item profile_style"><a class="nav-link active" aria-current="page" href="{% url 'announcement' %}" style="margin-right: 0; padding-right: 0px;"><img src="{{request.user.householder.householder_image.url}}" alt="mdo" width="32" height="32" class="rounded-circle"></a>
+        </li>
+        {% else %}
+        <li class="nav-item profile_style"><a class="nav-link active" aria-current="page" href="{% url 'announcement' %}" style="margin-right: 0; padding-right: 0px;"><i class="fas fa-user-circle account_logatip"></i></a>
+        </li>
+        {% endif %}
+
+
+      <li class="nav-item dropdown ms-auto account_menu_text18 menu_style"> 
+       
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <font class="fw-normal" color="black"> {{request.user.last_name}} {{request.user.first_name}}</font></a>
+
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="z-index: 2; font-size: 18px;">
+          <li><a class="dropdown-item baxodir_account_standart_text_bold" href="{% url 'settings' %}"><i class="fas fa-user-circle account_logotip_color"></i> Hisob sozlamalari</a></li>
+
+          <li><a class="dropdown-item" href="#"><i class="fab fa-gratipay account_logotip_color"></i> Uy yoqdi</a></li>
+
+          <li><a class="dropdown-item" href=""><i class="fas fa-question-circle account_logotip_color"></i> Yordam</a></li>
+
+          <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt account_logotip_color"></i> Tizimdan chiqish</a></li>
+
+        </ul>
+
+    </li>
+    </ul>
+
+  </div>    
+  </div>
+  </nav>
+</header>
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- END HEADER ********************************************************** -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+  
+
+
+
+<form method='POST' action="" enctype="multipart/form-data"> 
+{% csrf_token %}
+
+
+<div class="container-fluid mt-5">
+<div class="container">
+
+  
+<div class="row">
+
+<div class="col-lg-12">
+<div class="baxodir_account_card bg-white">
+<div class="baxodir_account_card_header">
+<h5 class="card-title text-info baxodir_account_standart_text_bold">Uyingizni qidirib topishlari uchun ma'lumotlarni diqqat bilan to'ldiring</h5>
+</div>
+<div class="card-body">
+
+
+<div class="row">
+    
+
+
+  <fieldset >
+  <div class="row baxodir_account_standart_text_bold">
+
+    <!-- mode -->
+    <div class="col-lg-6">
+    <label for="inputState" class="form-label">Uyingiz qayerda joylashgan</label>
+      <select required name="region" class="form-control">
+      <option value="">--Tanlang--</option>
+      <option value='Samarqand shahri'>Samarqand shahri</option>
+      <option value="Samarqand tumani">Samarqand tumani</option>
+      <option value="Toyloq tumani">Toyloq tumani</option>
+      <option value="Bulungʻur tumani">Bulungʻur tumani</option>
+      <option value="Jomboy tumani">Jomboy tumani</option>
+      <option value="Urgut tumani">Urgut tumani</option>
+      <option value="Pastdargʻom tumani">Pastdargʻom tumani</option>
+      <option value="Payariq tumani">Payariq tumani</option>
+      <option value="Oqdaryo tumani">Oqdaryo tumani</option>
+      <option value="Ishtixon tumani">Ishtixon tumani</option>
+      <option value="Qoʻshrabot tumani">Qoʻshrabot tumani</option>
+      <option value="Kattaqoʻrgʻon tumani">Kattaqoʻrgʻon tumani</option>
+      <option value="Nurobod tumani">Nurobod tumani</option>
+      <option value="Narpay tumani">Narpay tumani</option>
+      <option value="Paxtachi tumani">Paxtachi tumani</option>
+      </select>
+    </div>
+
+    <!-- Address -->
+    <div class="col-lg-6">
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Uy manzilini kiriting</label>
+    <input name="address" type="text" required placeholder="Ijaraga bermoqchi bo'lgan uyingizni manzilini kiriting" class="form-control">
+
+    </div>
+    </div>
+
+    <!-- phone_numer -->
+    <div class="col-lg-6">
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Telefon raqamingizni kiriting</label>
+    <input id="phoneNum" required name="phone_numer" type="text" placeholder="(893) xxx-xx-xx" class="form-control">
+    </div>
+    </div>
+
+<!--     <script type="text/javascript">
+      
+      let telEl = document.querySelector('#phoneNum')
+
+      telEl.addEventListener('keyup', (e) => {
+        let val = e.target.value;
+        e.target.value = val
+          .replace(/\D/g, '')
+          .replace(/(\d{1,4})(\d{1,3})?(\d{1,3})?/g, function(txt, f, s, t) {
+            if (t) {
+              return `(${f}) ${s}-${t}`
+            } else if (s) {
+              return `(${f}) ${s}`
+            } else if (f) {
+              return `(${f})`
+            }
+          });
+      })
+    </script> -->
+
+</div>
+</fieldset>
+
+
+
+
+
+<fieldset class="mt-4">
+<div class="row baxodir_account_standart_text_bold">
+
+   <!-- mode -->
+    <div class="col-lg-2">
+   
+    <label for="inputState" class="form-label">Hovli/Ko'pqavatli</label>
+      <select required id="floor" name="floor" class="form-control">
+      <option value="">--Tanlang--</option>
+      <option value='hovli joy'>hovli joy</option>
+      <option value="ko'p qavatli">ko'p qavatli</option>
+      </select>
+   
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-body">
+      
+    <label for="inputState" class="form-label">Qavatni tanlang</label>
+      <select id="floormany" name="floormany" class="form-control">
+      <option value="">--Tanlang--</option>
+      {% for f in floors %}
+      <option value='{{f.name}}'>{{f.name}}</option>
+      {% endfor %}
+      </select>
+  
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+    <script type="text/javascript">
+      document.getElementById("floor").onchange = function () {
+      document.getElementById("staticBackdrop").setAttribute("disabled", "disabled");
+      if (this.value == "ko'p qavatli"){
+        $('#staticBackdrop').modal("show"); //Open Modal
+      }else if (this.value == "hovli joy") {
+        $('#floormany').val("").change();
+      }
+
+      };
+
+
+    </script>
+
+    <!-- mode -->
+    <div class="col-lg-2">
+    <label for="inputState" class="form-label">Xonalar soni</label>
+      <select required name="rooms" class="form-control">
+      <option value="">--Tanlang--</option>
+      {% for r in room %}
+      <option value='{{r.name}}'>{{r.name}}</option>
+      {% endfor %}
+      </select>
+    </div>
+
+
+
+   
+
+
+ <!-- kimlar -->
+    <div class="col-lg-2">
+    <label for="inputState" class="form-label">Jinsi / Oila</label>
+      <select required name="kimlar" class="form-control">
+       <option value="">--Tanlang--</option>
+      <option value='erkak'>erkak</option>
+      <option value='ayol'>ayol</option>
+      <option value='oila'>oila</option>
+      </select>
+    </div>
+
+
+     <!-- kishilar -->
+    <div class="col-lg-2">
+    <label for="inputState" class="form-label">Kishilar soni</label>
+      <select required name="kishilar" class="form-control">
+      <option value="">--Tanlang--</option>
+      <option value='1 kishilik'>1 kishilik</option>
+      <option value='2 kishilik'>2 kishilik</option>
+      <option value='3 kishilik'>3 kishilik</option>
+      <option value='4 kishilik'>4 kishilik</option>
+      <option value='5 kishilik'>5 kishilik</option>
+      <option value='6 kishilik'>6 kishilik</option>
+      <option value='7 kishilik'>7 kishilik</option>
+      <option value='7 kishilik'>8 kishilik</option>
+      <option value='oilalilar'>oilalilar</option>
+      </select>
+    </div>
+
+     <!-- topshirilgan -->
+    <div class="col-lg-2">
+    <label for="inputState" class="form-label">Uy Bo'sh / Band</label>
+      <select required name="topshirilgan" class="form-control">
+       <option value="" disabled>--Tanlang--</option>
+      <option value="uy bo'sh">uy bo'sh</option>
+      <option value='uy band' disabled>uy band</option>
+      </select>
+    </div>
+
+
+
+<div class="col-lg-4 mt-4">
+<label for="floatingTextarea" for="inputState" class="form-label">Rasmlarni yuklang ( BIR YOKI BIR NECHTA )</label>
+<div class="input-group mb-3">
+<input required required name="images" type="file" multiple class="form-control">
+</div>
+
+</div>
+</fieldset>
+
+
+
+
+<fieldset class="mt-5">
+<div class="row baxodir_account_standart_text_bold">
+
+ <!-- mode -->
+    <div class="col-lg-2">
+    <label required for="inputState" class="form-label">Ijaraga berish vaqti</label>
+      <select name="mode" class="form-control">
+      <option value="">--Tanlang--</option>
+      <option value='kunlik ijara'>kunlik ijara</option>
+      <option value='oylik ijara'>oylik ijara</option>
+      <option value='yillik ijara'>yillik ijara</option>
+      </select>
+    </div>
+
+ <div class="col-lg-2">
+ <div class="mb-3">
+    <label  class="form-label">Pul.mun tanlang</label>
+    <select required name="moneyc"  class="form-select">
+    <option value="">--Tanlang--</option>
+    <option value="USD">USD</option>
+    <option value='RUB'>RUB</option>
+    <option value='UZS'>UZS</option>
+    </select>
+ </div>
+ </div>
+
+
+<div class="col-lg-4">   
+    <div class="mb-3">
+    <label  class="form-label">Qiymatni kiriting</label>
+    <input required type="text" name="money"  class="form-control" placeholder="50 000">
+</div>
+</div>
+
+
+
+</div>
+</fieldset>
+
+
+
+
+<fieldset class="mt-5">
+<div class="row baxodir_account_standart_text_bold">
+
+
+<div class="col-lg-4">
+<label for="floatingTextarea">Uyingiz uchun tartiblarni yozing </label>
+<div class="form-floating">
+<textarea name="tartiblar" class="form-control" style="height: 100px"></textarea>
+<label for="floatingTextarea">Ijarachi qilishi mumkun bo'lmagan tartiblarni kiriting</label>
+</div>
+</div>
+
+
+<div class="col-lg-4">
+    <label for="floatingTextarea">Ijarachiga ish taklif qila olasizmi? Yozing!</label>
+    <div class="form-floating">
+    <textarea name="ish" class="form-control" style="height: 100px"></textarea>
+    <label for="floatingTextarea">Agar ijarachiga ish taklif qila olsangiz batafsil yozing</label>
+    </div>
+    </div>
+
+
+</div>
+</fieldset>
+
+
+
+
+
+ <!-- topshirilgan -->
+  <fieldset>
+  <div class="row baxodir_account_standart_text_bold">
+  <div class="baxodir_account_card_header mt-4">
+  <h5 class="card-title text-info baxodir_account_standart_text_bold">Iste'mol ehtiyojlari <font style="color: red;">KT-Komunal to'lov</font> </h5>
+  </div>
+
+  
+  <div class="col-lg-2">
+  <div class="mb-3">
+  <label  class="form-label">Sovuq suv</label>
+  <select required name="sovuq_suv"  class="form-select">
+  <option value="">--Tanlang--</option>
+  <option value="sovuq suv bor KT.bilan">sovuq suv bor KT.bilan</option>
+  <option value='sovuq suv bor KT.tashqari'>sovuq suv bor KT.tashqari</option>
+  <option value="sovuq suv yo'q">sovuq suv yo'q</option>
+  </select>
+  </div>
+  </div>
+
+
+   <div class="col-lg-2">
+  <div class="mb-3">
+  <label  class="form-label">Issiq suv</label>
+  <select required name="issiq_suv"  class="form-select">
+   <option value="">--Tanlang--</option>
+  <option value="issiq suv bor KT.bilan">issiq suv bor KT.bilan</option>
+  <option value='issiq suv bor KT.tashqari'>issiq suv bor KT.tashqari</option>
+  <option value="issiq suv yo'q">issiq suv yo'q</option>
+  </select>
+  </div>
+  </div>
+
+    <div class="col-lg-2">
+  <div class="mb-3">
+  <label  class="form-label">Elektr energiya</label>
+  <select required name="svet"  class="form-select">
+   <option value="">--Tanlang--</option>
+  <option value="elektr bor KT.bilan">elektr bor KT.bilan</option>
+  <option value='elektr bor KT.tashqari'>elektr bor KT.tashqari</option>
+  <option value="elektr yo'q">elektr yo'q</option>
+  </select>
+  </div>
+  </div>
+
+
+
+  <div class="col-lg-2">
+  <div class="mb-3">
+  <label  class="form-label">Gaz</label>
+  <select required name="gaz"  class="form-select">
+   <option value="">--Tanlang--</option>
+  <option value="gaz bor KT.bilan">gaz bor KT.bilan</option>
+  <option value='gaz bor KT.tashqari'>gaz bor KT.tashqari</option>
+  <option value="gaz yo'q">gaz yo'q</option>
+  </select>
+  </div>
+  </div>
+  
+    
+  <div class="col-lg-6">
+  <label for="floatingTextarea">Qo'shimchalar kiriting</label>
+  <div class="form-floating">
+  <textarea name="additional2" class="form-control" style="height: 100px"></textarea>
+  <label for="floatingTextarea">Iste'mol ehtiyojlari bo'limi uchun qo'shimcha kiritishingiz mumkun</label>
+  </div>
+  </div>
+
+
+    </div>
+    </div>  
+  </fieldset>
+
+
+
+
+<!-- /***************************************/* -->
+  <fieldset>
+  <div class="row baxodir_account_standart_text_bold">
+  <div class="baxodir_account_card_header mt-4">
+  <h5 class="card-title text-info baxodir_account_standart_text_bold">Elektron vositalari <font style="color: red;">KT-Komunal to'lov</font></h5>
+  </div>
+  
+  <div class="col-lg-2">
+  <div class="mb-3">
+  <label  class="form-label">Wifi</label>
+  <select required name="wifi"  class="form-select">
+   <option value="">--Tanlang--</option>
+  <option value="wifi bor KT.bilan">wifi bor KT.bilan</option>
+  <option value='wifi bor KT.tashqari'>wifi bor KT.tashqari</option>
+  <option value="wifi yo'q">wifi yo'q</option>
+  </select>
+  </div>
+  </div>
+
+  <div class="col-lg-3">
+  <div class="mb-3">
+  <label  class="form-label">Sovutgich</label>
+  <select required name="sovutgich"  class="form-select">
+   <option value="">--Tanlang--</option>
+  <option value="sovutgich bor KT.bilan">sovutgich bor KT.bilan</option>
+  <option value='sovutgich bor KT.tashqari'>sovutgich bor KT.tashqari</option>
+  <option value="sovutgich yo'q">sovutgich yo'q</option>
+  </select>
+  </div>
+  </div>
+
+
+  <div class="col-lg-3">
+  <div class="mb-3">
+  <label  class="form-label">Kondisioner</label>
+  <select required name="kondisioner"  class="form-select">
+   <option value="">--Tanlang--</option>
+  <option value="kondisioner bor KT.bilan">kondisioner bor KT.bilan</option>
+  <option value='kondisioner bor KT.tashqari'>kondisioner bor KT.tashqari</option>
+  <option value="kondisioner yo'q">kondisioner yo'q</option>
+  </select>
+  </div>
+  </div>
+
+  <div class="col-lg-6">
+  <label for="floatingTextarea">Qo'shimchalar kiriting</label>
+  <div class="form-floating">
+  <textarea name="additional3" class="form-control" style="height: 100px"></textarea>
+  <label for="floatingTextarea">Elektron vositalari bo'limi uchun qo'shimcha kiritishingiz mumkun</label>
+  </div>
+  </div>
+
+  </div>  
+  </fieldset>
+
+
+
+
+
+
+<!-- /***************************************/* -->
+  <fieldset>
+  <div class="row baxodir_account_standart_text_bold">
+  <div class="baxodir_account_card_header mt-4">
+  <h5 class="card-title text-info baxodir_account_standart_text_bold">Gigiyena sharaoidlar <font style="color: red;">KT-Komunal to'lov</font></h5>
+  </div>
+  
+
+  <div class="col-lg-2">
+  <div class="mb-3">
+  <label  class="form-label">Hammom</label>
+  <select required name="hammom"  class="form-select">
+   <option value="">--Tanlang--</option>
+  <option value="hammom bor KT.bilan">hammom bor KT.bilan</option>
+  <option value='hammom bor KT.tashqari'>hammom bor KT.tashqari</option>
+  <option value="hammom yo'q">hammom yo'q</option>
+  </select>
+  </div>
+  </div>
+
+  <div class="col-lg-6">
+  <label for="floatingTextarea">Qo'shimchalar Yozing</label>
+  <div class="form-floating">
+  <textarea name="additional4" class="form-control" style="height: 100px"></textarea>
+  <label for="floatingTextarea">Gigiyena sharaoidlar bo'limi uchun qo'shimcha kiritishingiz mumkun</label>
+  </div>
+  </div>
+
+
+
+  </div>  
+  </fieldset>
+
+
+
+<!-- /***************************************/* -->
+  <fieldset>
+  <div class="row baxodir_account_standart_text_bold">
+  <div class="baxodir_account_card_header mt-4">
+  <h5 class="card-title text-info baxodir_account_standart_text_bold">Xavfsizlik tizimi</h5>
+  </div>
+  
+  <div class="col-lg-2">
+  <div class="mb-3">
+  <label  class="form-label">Xafsizlik chorasi</label>
+  <select required name="xafsiz"  class="form-select">
+   <option value="">--Tanlang--</option>
+  <option value='xavsizlik El.tizimi bor'>Xavsizlik El.tizimi bor</option>
+  <option value="xavsizlik El.tizimi yo'q">Xavsizlik El.tizimi yo'q</option>
+  </select>
+  </div>
+  </div>
+
+  <div class="col-lg-6">
+  <label for="floatingTextarea">Qo'shimchalar kiriting</label>
+  <div class="form-floating">
+  <textarea name="additional5" class="form-control" style="height: 100px"></textarea>
+  <label for="floatingTextarea">Xavfsizlik tizimi bo'limi uchun qo'shimcha kiritishingiz mumkun</label>
+  </div>
+
+  </div>
+  
+
+  </div>  
+  </fieldset>
+
+</div>
+
+<button type='submit' class="btn btn-primary m-3 baxodir_account_standart_text_bold">E'lonni saqlash va e'lon qilish</button>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+</form>
+
+<div style="height: 100px;"></div>
+ 
+{% endblock %}
+
+
+  
+
+
+
+
+
+
+

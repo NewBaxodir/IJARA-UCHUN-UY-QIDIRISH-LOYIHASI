@@ -1,0 +1,27 @@
+{% load socialaccount %}
+{% providers_media_js %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	
+
+
+	 {% if user.is_authenticated %}
+  <p>Welcome, {{ user.username }} !</p>
+ 
+  {% else %}
+ <div class="alert alert-danger" role="alert">
+   <a href="{% provider_login_url 'google' %}" class="alert-link">Clike Here</a>Login with Google Accounts.
+</div>
+ 
+  {% endif %}
+
+
+</body>
+</html>

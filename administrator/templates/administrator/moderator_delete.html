@@ -1,0 +1,93 @@
+{% extends 'administrator/base_admin.html' %}
+
+{% load static %}
+
+
+
+
+{% block elon %}
+<div id="accordion">
+<li class="collapse_list" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+<i class="fas fa-bullhorn"></i></i>
+<span class="text_collapse">E'lonlar</span> </li>
+<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+<ul class="small_menu">
+<a href="{% url 'admin_announcements' %}"><li>E'lonlar</li></a>
+</ul>
+</div>
+</div>
+{% endblock %}
+
+
+
+{% block administrator %}
+<div id="accordion">
+<li class="collapse_list" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne"><i class="fas fa-user-shield"></i><span class="text_collapse">Administrator</span> </li>
+<div id="collapseThree" class="collapse show"  data-parent="#accordion">
+        
+<ul class="small_menu">
+
+<a href="{% url 'admin_announcers' %}"><li>Hisoblar</li></a>
+
+<a href="{% url 'moderators' %}"><li style="color: #568fed;">Moderatorlar</li></a>
+
+</ul>
+
+</div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- CONTAINER  -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+{% block container %}
+
+<div class="container-fluid">
+<div class="container">
+
+<form method="POST"> {% csrf_token %}
+
+
+<div class="col-lg-12 mt-5">
+<div class="admin_announcements_border bg-white mb-5">
+<div class="admin_announcements_padding col-lg-12 mt-4">
+<h5>Moderatorni o'chirish sahifasi</h5>
+</div>
+
+<div class="card-body">
+<h6 class="card-title baxodir_account_standart_text">Familya: {{moderator.last_name}}</h6>
+<h6 class="card-title baxodir_account_standart_text">Ism: {{moderator.first_name}}</h6>
+<h6 class="card-title baxodir_account_standart_text">Otasini ismi: {{moderator.useradminpage.father_name}}</h6>
+
+<button type="submit" class="btn btn-danger mt-4">Hisobini o'chirilishini tasdiqlayman!</button>
+
+</div>
+</div>
+</div>
+
+</form>
+
+</div>
+</div>
+</div>
+
+
+
+{% endblock %}
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- CONTAINER  -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->

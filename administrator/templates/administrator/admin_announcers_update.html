@@ -1,0 +1,97 @@
+{% extends 'administrator/base_admin.html' %}
+
+{% load static %}
+
+
+
+
+{% block elon %}
+<div id="accordion">
+<li class="collapse_list" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+<i class="fas fa-bullhorn"></i></i>
+<span class="text_collapse">E'lonlar</span> </li>
+<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+<ul class="small_menu">
+<a href="{% url 'admin_announcements' %}"><li>E'lonlar</li></a>
+</ul>
+</div>
+</div>
+{% endblock %}
+
+
+{% block administrator %}
+<div id="accordion">
+<li class="collapse_list" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne"><i class="fas fa-user-shield"></i><span class="text_collapse">Administrator</span> </li>
+<div id="collapseThree" class="collapse show"  data-parent="#accordion">
+        
+<ul class="small_menu">
+
+<a href="{% url 'admin_announcers' %}"><li style="color: #568fed;">Hisoblar</li></a>
+
+<a href="{% url 'moderators' %}"><li>Moderatorlar</li></a>
+
+</ul>
+
+</div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- CONTAINER  -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+{% block container %}
+
+
+<div class="container-fluid mt-4">
+<div class="container">
+
+<div class="row">
+
+<div class="col-lg-12 mt-4 mb-5">
+<div class="baxodir_account_card bg-white">
+<div class="baxodir_account_card_header">
+<h5 class="card-title baxodir_account_standart_text_bold">Hisobingizni o'zgartirish</h5>
+</div>
+<div class="card-body">
+ <form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  {{form.as_p}}
+  {{ user_form.as_p }}
+  {{ profile_form.as_p }}
+ 
+
+<button type="submit" class="btn btn-primary mt-3">O'zgarishlarni Tasdiqlayman</button>
+  </form>
+</div>
+</div>
+</div>
+
+
+</div>
+
+
+</div>
+</div>
+
+{% endblock %}
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- CONTAINER  -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+
+
+
+
+
+
+
+

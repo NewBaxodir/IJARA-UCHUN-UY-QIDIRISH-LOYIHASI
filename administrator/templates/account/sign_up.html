@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+<title> Home | Search Hotel </title> 
+{% endblock %}
+{% load static %}
+{% load google_translate %}
+
+{% block style %} 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'style/account.css' %}">
+{% endblock %}
+
+
+
+
+ 
+{% block content %}
+<style type="text/css">
+  #id_last_name, #id_username, #id_phone_numer, #id_first_name, #id_email, #id_username, #id_password1{
+    margin-bottom: 5px; 
+  }
+  #id_password2{
+    margin-top: 5px;
+  }
+
+  .field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -32px;
+  position: relative;
+  z-index: 2;
+}
+
+.field-icon2 {
+  float: right;
+  margin-left: -25px;
+  margin-top: -27px;
+  position: relative;
+  z-index: 2;
+
+}
+</style>
+<body class="text-center" style="background-color: #f5f5f5;">
+
+
+    <form class="form-signin col-11 col-sm-6 col-md-6 col-lg-3 mt-5 m-auto baxodir_account_card mb-4 p-3 bg-white" action="{% url 'sign_up' %}" method="POST" novalidate enctype="multipart/form-data">{% csrf_token %}
+   
+
+      <a href="{% url 'home' %}">
+      <img class="mb-4" src="{% static 'images/logo4.png' %}" alt="" width="70" height="70">
+      </a>
+
+      <h3 class="h5 mb-3 font-weight-normal" style="font-family: 'Baloo Chettan 2', cursive; font-size: 20px;">Ro'yxatdan o'tish</h3>
+      
+      <div class="form-group" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+      <label  class="form-label" style="float: left;">Familya</label> 
+      {{form.last_name}} {{form.last_name.errors}} 
+      </div>
+      
+      <div class="form-group" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+        <label  class="form-label" style="float: left;">Ism</label>
+      {{form.first_name}} {{form.first_name.errors}} 
+      </div>
+
+  
+      <div class="form-group" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+         <label  class="form-label" style="float: left;">Tel nomer</label>
+       {{form.phone_numer}} {{form.phone_numer.errors}} 
+      </div>
+
+      <div class="form-group" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+         <label  class="form-label" style="float: left;">Login</label>
+       {{form.username}} {{form.username.errors}} 
+      </div>
+      
+      <div class="form-group" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+         <label  class="form-label" style="float: left;">Parol</label>
+       {{form.password1}}
+      <i id="eyebaxodir" class="fas fa-eye field-icon" onclick="Baxodir1()"></i>
+      {{form.password1.errors}} 
+      </div>
+
+
+      <div class="form-group" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+         <label  class="form-label" style="float: left;">Parolni takrorlang</label>
+       {{form.password2}}
+       <i id="eyebaxodir2" class="fas fa-eye field-icon2" onclick="Baxodir2()"></i>
+        {{form.password2.errors}} 
+      </div>
+
+      <div class="checkbox mb-3 mt-3">
+        <label style="float: left; font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+          <input type="checkbox" value="remember-me"> Eslab qolish
+        </label>
+          
+        <label style="float: right; font-family: 'Baloo Chettan 2', cursive; font-size: 16px;"><a href="{% url 'sign_in' %}">Tizimga kirish</a></label>
+      
+      </div>
+
+      <button class="mt-3 btn btn-lg btn-primary active btn-block col-12 col-sm-12 col-md-12 col-lg-12" type="submit" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">Tasdiqlash</button>
+
+        <div class="mt-3">
+      <a href="{% url 'social:begin' 'google-oauth2' %}">
+      
+      <div class="google-btn">
+      <div class="google-icon-wrapper">
+      <img class="google-icon rounded border border-primary p-2" src="{% static 'images/Google__G__Logo.svg' %}" width="40" style="border: 1px solid red; background-color: white;" />
+      </div>
+      </div>
+      </a>
+
+      </div>
+
+       
+
+
+      <p class="mt-5 mb-3 text-muted" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">© 2021-2022</p>
+
+
+    </form>
+
+
+
+
+<script>
+
+// $(".fas").on('click', function() {
+// $('#id_password1').toggleClass("close");
+// $('.info-open').toggleClass("info-close");
+// });
+
+function Baxodir1() {
+  
+  var p1 = document.getElementById("id_password1");
+  if (p1.type === "password") {
+    $('#eyebaxodir').toggleClass("fas fa-eye-slash");
+    p1.type = "text";
+  } else {
+    p1.type = "password";
+    $('#eyebaxodir').toggleClass("fas fa-eye");
+  }
+}
+
+
+function Baxodir2() {
+  
+  var p2 = document.getElementById("id_password2");
+  if (p2.type === "password") {
+    $('#eyebaxodir2').toggleClass("fas fa-eye-slash");
+    p2.type = "text";
+  } else {
+    p2.type = "password";
+    $('#eyebaxodir2').toggleClass("fas fa-eye");
+  }
+}
+
+</script>
+
+
+</body>
+
+
+
+
+
+{% endblock %}
+

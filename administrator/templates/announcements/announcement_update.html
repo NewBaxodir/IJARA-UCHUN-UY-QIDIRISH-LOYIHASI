@@ -1,0 +1,481 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+<title> Home | Search Hotel </title> 
+{% endblock %}
+{% load static %}
+
+
+{% block style %} 
+<link rel="stylesheet" type="text/css" href="{% static 'style/announcements.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<style type="text/css">
+
+@media screen and (max-width: 767px) {
+.menu_style{
+  width: 100%;
+}
+
+.profile_style{
+  display: none;
+}
+
+}
+
+</style>
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- HEADER ************************************************************** -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<header style="border-radius: 0px;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm p-3 bg-body rounded-start">
+    <div class="container-fluid">
+      <a class="navbar-brand landing-brand account_text" href="{% url 'account' %}">
+        <i class="fas fa-key account_logatip"></i>
+      <!-- <img class="mb-1" src="{% static 'images/logo.png' %}" alt="" width="40" height="40"> -->
+      House 
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <!-- **************************** -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+             
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+      <li class="nav-item account_menu_text18"><a class="nav-link" aria-current="page" href="{% url 'account' %}">Qidiruv</a>
+      </li>
+
+
+        <li class="nav-item account_menu_text18"><a class="nav-link active" aria-current="page" href="{% url 'announcement' %}">E'lonlar</a>
+        </li>
+
+        {% if request.user.householder.householder_image != "" %}
+        <li class="nav-item profile_style"><a class="nav-link active" aria-current="page" href="{% url 'announcement' %}" style="margin-right: 0; padding-right: 0px;"><img src="{{request.user.householder.householder_image.url}}" alt="mdo" width="32" height="32" class="rounded-circle"></a>
+        </li>
+        {% else %}
+        <li class="nav-item profile_style"><a class="nav-link active" aria-current="page" href="{% url 'announcement' %}" style="margin-right: 0; padding-right: 0px;"><i class="fas fa-user-circle account_logatip"></i></a>
+        </li>
+        {% endif %}
+
+
+      <li class="nav-item dropdown ms-auto account_menu_text18 menu_style"> 
+       
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <font class="fw-normal" color="black"> {{request.user.last_name}} {{request.user.first_name}}</font></a>
+
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="z-index: 2; font-size: 18px;">
+          <li><a class="dropdown-item baxodir_account_standart_text_bold" href="{% url 'settings' %}"><i class="fas fa-user-circle account_logotip_color"></i> Hisob sozlamalari</a></li>
+
+          <li><a class="dropdown-item" href="#"><i class="fab fa-gratipay account_logotip_color"></i> Uy yoqdi</a></li>
+
+          <li><a class="dropdown-item" href=""><i class="fas fa-question-circle account_logotip_color"></i> Yordam</a></li>
+
+          <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt account_logotip_color"></i> Tizimdan chiqish</a></li>
+
+        </ul>
+
+    </li>
+    </ul>
+
+  </div>    
+  </div>
+  </nav>
+</header>
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- END HEADER ********************************************************** -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+  
+
+
+
+
+
+
+<form method='POST' action="" enctype="multipart/form-data"> 
+{% csrf_token %}
+
+
+<div class="container-fluid mt-5">
+<div class="container">
+
+  
+<div class="row">
+
+<div class="col-lg-12">
+<div class="baxodir_account_card bg-white">
+<div class="baxodir_account_card_header">
+<h5 class="card-title text-info baxodir_account_standart_text_bold">Uyingizni qidirib topishlari uchun ma'lumotlarni diqqat bilan to'ldiring</h5>
+</div>
+<div class="card-body">
+
+
+<div class="row">
+    
+
+
+  <fieldset >
+  <div class="row baxodir_account_standart_text_bold">
+    <!-- Address -->
+    <div class="col-lg-6">
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Uy hududni o'zgartirish</label>
+    {{form.region}}
+    </div>
+    </div>
+
+    <!-- Address -->
+    <div class="col-lg-6">
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Uy manzilini kiriting (Hududning ichki manzili)</label>
+    {{form.address}}
+    </div>
+    </div>
+
+     <div class="col-lg-6">
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Geolokatsiya</label>
+    {{form.geolocaion}}
+    </div>
+    </div>
+
+    <!-- phone_numer -->
+    <div class="col-lg-6">
+    <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Telefon raqamingizni kiriting</label>
+    {{form.phone_numer}}
+    </div>
+    </div>
+
+
+</div>
+</fieldset>
+
+
+
+
+
+
+
+
+
+
+
+<fieldset class="mt-4">
+<div class="row baxodir_account_standart_text_bold">
+
+
+   <!-- mode -->
+    <div class="col-lg-2">
+    <label for="inputState" class="form-label">Hovli/Ko'p qavatli</label>
+      {{form.floor}}
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-body">
+       
+    <label for="inputState" class="form-label">Qavatni tanlang</label>
+      {{form.floormany}}
+
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+    <script type="text/javascript">
+      document.getElementById("id_floor").onchange = function () {
+      document.getElementById("staticBackdrop").setAttribute("disabled", "disabled");
+      if (this.value == "ko'p qavatli"){
+        $('#staticBackdrop').modal("show"); //Open Modal
+      }else if (this.value == "hovli joy") {
+        $('#id_floormany').val("").change();
+      }
+
+      };
+    </script>
+
+    <!-- mode -->
+    <div class="col-lg-2">
+    <label for="inputState" class="form-label">Xonalar soni</label>
+      {{form.rooms}}
+    </div>
+
+
+
+  
+
+ <!-- kimlar -->
+    <div class="col-lg-2">
+    <label for="inputState" class="form-label">Jinsi / Oila</label>
+      {{form.kimlar}}
+    </div>
+
+
+     <!-- kishilar -->
+    <div class="col-lg-2">
+    <label for="inputState" class="form-label">Kishilar soni</label>
+      {{form.kishilar}}
+    </div>
+
+     <!-- topshirilgan -->
+    <div class="col-lg-2">
+    <label for="inputState" class="form-label">Uy Bo'sh / Band</label>
+      {{form.topshirilgan}}  
+    </div>
+
+
+
+</fieldset>
+
+
+
+
+
+
+<fieldset class="mt-5">
+<div class="row baxodir_account_standart_text_bold">
+  <!-- mode -->
+    <div class="col-lg-2">
+    <label for="inputState" class="form-label">Ijaraga berish vaqti</label>
+      {{form.mode}}
+    </div>
+
+
+ <div class="col-lg-2">
+    <label for="inputState" class="form-label">Pul.mun tanlang</label>
+   {{form.moneyc}}
+ </div>
+
+
+<div class="col-lg-4">   
+    <label for="inputState" class="form-label">Qiymatni kiriting</label>
+    {{ form.money }}
+</div>
+
+
+
+</div>
+</fieldset>
+
+
+
+
+<fieldset class="mt-5">
+<div class="row baxodir_account_standart_text_bold">
+
+
+<div class="col-lg-4">
+<label for="floatingTextarea">Uyingiz uchun tartiblarni yozing </label>
+<div class="form-floating">
+{{form.tartiblar}}
+<label for="floatingTextarea">Ijarachi qilishi mumkun bo'lmagan tartiblarni kiriting</label>
+
+</div>
+</div>
+
+
+
+
+<div class="col-lg-4">
+    <label for="floatingTextarea">Ijarachiga ish taklif qila olasizmi? Yozing!</label>
+    <div class="form-floating">
+    {{form.ish}}
+    <label for="floatingTextarea">Agar ijarachiga ish taklif qila olsangiz batafsil yozing</label>
+
+    </div>
+    </div>
+
+
+</div>
+</fieldset>
+
+
+
+
+
+ <!-- topshirilgan -->
+  <fieldset>
+  <div class="row baxodir_account_standart_text_bold">
+  <div class="baxodir_account_card_header mt-4">
+  <h5 class="card-title text-info baxodir_account_standart_text_bold">Iste'mol ehtiyojlari <font style="color: red;">KT-Komunal to'lov</font></h5>
+  </div>
+
+  
+  <div class="col-lg-2">
+  <label  for="inputState" class="form-label">Sovuq suv</label>
+  {{form.sovuq_suv}}
+  </div>
+
+
+   <div class="col-lg-2">
+  <label  for="inputState" class="form-label">Issiq suv</label>
+  {{form.issiq_suv}}
+  </div>
+
+    <div class="col-lg-2">
+  <label for="inputState" class="form-label">Elektr energiya</label>
+  {{form.svet}}
+  </div>
+
+
+
+  <div class="col-lg-2">
+  <div class="mb-3">
+  <label  for="inputState" class="form-label">Gaz</label>
+  {{form.gaz}}
+  </div>
+  </div>
+  
+    
+  <div class="col-lg-6">
+  <label for="floatingTextarea">Qo'shimchalar kiriting</label>
+  <div class="form-floating">
+  {{form.additional2}}
+  <label for="floatingTextarea">Iste'mol ehtiyojlari bo'limi uchun qo'shimcha kiritishingiz mumkun</label>
+
+  </div>
+  </div>
+
+
+    </div>
+    </div>  
+  </fieldset>
+
+
+
+
+<!-- /***************************************/* -->
+  <fieldset>
+  <div class="row baxodir_account_standart_text_bold">
+  <div class="baxodir_account_card_header mt-4">
+  <h5 class="card-title text-info baxodir_account_standart_text_bold">Elektron vositalari <font style="color: red;">KT-Komunal to'lov</font></h5>
+  </div>
+  
+  <div class="col-lg-2">
+  <div class="mb-3">
+  <label  for="inputState" class="form-label">Wifi</label>
+  {{form.wifi}}
+  </div>
+  </div>
+
+  <div class="col-lg-3">
+  <label for="inputState" class="form-label">Sovutgich</label>
+  {{form.sovutgich}}
+  </div>
+
+
+  <div class="col-lg-3">
+  <label  for="inputState" class="form-label">Kondisioner</label>
+  {{form.kondisioner}}
+  </div>
+
+  <div class="col-lg-6">
+  <label for="floatingTextarea">Qo'shimchalar kiriting</label>
+  <div class="form-floating">
+  {{form.additional3}}
+  <label for="floatingTextarea">Elektron vositalari bo'limi uchun qo'shimcha kiritishingiz mumkun</label>
+
+  </div>
+  </div>
+
+  </div>  
+  </fieldset>
+
+
+
+
+
+
+<!-- /***************************************/* -->
+  <fieldset>
+  <div class="row baxodir_account_standart_text_bold">
+  <div class="baxodir_account_card_header mt-4">
+  <h5 class="card-title text-info baxodir_account_standart_text_bold">Gigiyena sharaoidlar <font style="color: red;">KT-Komunal to'lov</font></h5>
+  </div>
+  
+
+  <div class="col-lg-2">
+  <label  for="inputState" class="form-label">Hammom</label>
+  {{form.hammom}}
+  </div>
+
+  <div class="col-lg-6">
+  <label for="floatingTextarea">Qo'shimchalar Yozing</label>
+  <div class="form-floating">
+  {{form.additional4}}
+  <label for="floatingTextarea">Gigiyena sharaoidlar bo'limi uchun qo'shimcha kiritishingiz mumkun</label>
+
+  </div>
+  </div>
+
+
+
+  </div>  
+  </fieldset>
+
+
+
+<!-- /***************************************/* -->
+  <fieldset>
+  <div class="row baxodir_account_standart_text_bold">
+  <div class="baxodir_account_card_header mt-4">
+  <h5 class="card-title text-info baxodir_account_standart_text_bold">Xavfsizlik tizimi <font style="color: red;">KT-Komunal to'lov</font></h5>
+  </div>
+  
+  <div class="col-lg-2">
+  <label  for="inputState" class="form-label">Xafsizlik chorasi</label>
+  {{form.xafsiz}}
+  </div>
+
+  <div class="col-lg-6">
+  <label for="floatingTextarea">Qo'shimchalar kiriting</label>
+  <div class="form-floating">
+  {{form.additional5}}
+  <label for="floatingTextarea">Xavfsizlik tizimi bo'limi uchun qo'shimcha kiritishingiz mumkun</label>
+
+  </div>
+  </div>
+  
+  </div>  
+  </fieldset>
+
+</div>
+
+<button type='submit' class="btn btn-primary m-3 baxodir_account_standart_text_bold">E'lonni saqlash va e'lon qilish</button>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+</form>
+
+<div style="height: 100px;"></div>
+
+{% endblock %}
+
+
+  
+
+
+
+
+
+
+

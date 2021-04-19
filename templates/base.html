@@ -1,0 +1,113 @@
+{% load google_translate %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+{% load static %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'style/style.css' %}"> 
+<script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&display=swap" rel="stylesheet"> 
+
+
+{% block title %} 
+{% endblock %}
+
+    
+{% block style %} 
+{% endblock %}
+
+</head>
+
+<body style="background-color: #f7f9fc;">
+
+{% block content %}
+{% endblock %}
+
+
+{% block scripts %}
+{% endblock scripts %}
+
+
+{% block footer %}
+<footer class="bg-secondary text-center text-white">
+<div class="container p-4">
+<section class="mb-4">
+<a class="btn btn-outline-light btn-floating m-1" href="#" role="button"><i class="fab fa-google-play" style="font-size: 18px;"></i> Google Play</a>
+<a class="btn btn-outline-light btn-floating m-1" href="#" role="button"
+><i class="fab fa-apple" style="font-size: 25px;"></i> App Store</a>
+</section>
+<section class="mb-4">
+<p  style="font-family: 'Baloo Chettan 2'; font-size: 18px;">
+        Tizim: Turizm, Talabalar, va Fuqorolor uchun vaqtinchalik ijaraga uy topish uchun yordamalshadi. Tizimdan foydalanishda sizda muommolar tug'ilsa bizga murojat qilishingiz mumkun. Biz sizga doimo yordam berishdan mamnun bo'lamiz.</p>
+    </section>
+
+<section class="">
+<div class="row">
+<div class="col-lg-3 col-md-6 mb-4 mb-md-0" style="font-family: 'Baloo Chettan 2';">
+<h6 class="text-uppercase">Bizning hamkorlarimiz</h6>
+<ul class="list-unstyled mb-0">
+<li>
+<a href="#!" class="text-white">iT-Future</a>
+</li>
+<li>
+<a href="#!" class="text-white">House Hotel</a>
+</li>     
+</ul>
+</div>
+<div class="col-lg-3 col-md-6 mb-4 mb-md-0" style="font-family: 'Baloo Chettan 2';">
+<h6 class="text-uppercase">Biznes takliflar</h6>
+<ul class="list-unstyled mb-0"> 
+<li>
+<a href="tel:{{f.phone_numer}}" class="text-white">+7 (961) 455-99-27</a>
+</li>
+<li>
+<a href="https://t.me/baxodirdavirov1997" class="text-white">@baxodirdavirov1997</a>
+</li>
+</ul>
+</div>
+<div class="col-lg-3 col-md-6 mb-4 mb-md-0" style="font-family: 'Baloo Chettan 2';">
+<h6 class="text-uppercase">shikoyatlar uchun</h6>
+<ul class="list-unstyled mb-0">
+<li>
+<a href="tel:{{f.phone_numer}}" class="text-white">+7 (961) 455-99-27</a>
+</li>
+<li>
+<a href="https://t.me/baxodirdavirov1997" class="text-white">@baxodirdavirov1997</a>
+</li>
+</ul>
+</div>
+<div class="col-lg-3 col-md-6 mb-4 mb-md-0" style="font-family: 'Baloo Chettan 2';">
+<h6 class="text-uppercase">Yordam uchun</h6>
+<ul class="list-unstyled mb-0">
+<li>
+<a href="tel:{{f.phone_numer}}" class="text-white">+7 (961) 455-99-27</a>
+</li>
+<li>
+<a href="https://t.me/baxodirdavirov1997" class="text-white">@baxodirdavirov1997</a>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+<div class="text-center p-3" style="font-family: 'Baloo Chettan 2'; background-color: rgba(0, 0, 0, 0.2);">
+    © 2021 Barcha huquqlar himoyalangan
+</div>
+</footer>
+{% endblock %}
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>  
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/plugin.js' %}"></script>
+
+</body>
+</html>

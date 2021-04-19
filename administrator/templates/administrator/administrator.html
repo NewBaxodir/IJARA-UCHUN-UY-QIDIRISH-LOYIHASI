@@ -1,0 +1,70 @@
+{% extends 'administrator/base_admin.html' %}
+
+{% load static %}
+
+
+
+
+
+
+
+{% block elon %}
+<div id="accordion">
+<li class="collapse_list" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+<i class="fas fa-bullhorn"></i></i>
+<span class="text_collapse">E'lonlar</span> </li>
+<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+<ul class="small_menu">
+<a href="{% url 'admin_announcements' %}"><li>E'lonlar</li></a>
+</ul>
+</div>
+</div>
+{% endblock %}
+
+
+{% block administrator %}
+<div id="accordion">
+<li class="collapse_list" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne"><i class="fas fa-user-shield"></i><span class="text_collapse">Administrator</span> </li>
+<div id="collapseThree" class="collapse"  data-parent="#accordion">
+        
+<ul class="small_menu">
+
+<a href="{% url 'admin_announcers' %}"><li>Hisoblar</li></a>
+
+<a href="{% url 'moderators' %}"><li>Moderatorlar</li></a>
+
+</ul>
+
+</div>
+</div>
+{% endblock %}
+
+
+
+
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- CONTAINER  -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+{% block container %}
+
+moderators
+{% if user.is_authenticated %}
+
+{% endif %}
+{{request.user.last_name}} 
+
+{{request.user.first_name}}
+
+{{request.user.useradminpage.father_name}}
+
+
+{{request.user.id}}
+
+
+
+{% endblock %}
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- CONTAINER  -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+

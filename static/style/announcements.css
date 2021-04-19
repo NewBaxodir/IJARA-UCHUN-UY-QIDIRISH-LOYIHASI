@@ -1,0 +1,48 @@
+.account_text{
+  font-family: 'Baloo Chettan 2', cursive;  
+}
+
+.account_logatip{
+  color: rgb(44,26,120); 
+  font-size: 25px;
+}
+
+.account_logotip_color{
+  color: rgb(44,26,120);
+}
+
+
+.account_menu_text18{
+  font-family: 'Baloo Chettan 2', cursive; 
+  font-size: 18px;
+}
+
+
+
+.baxodir_account_card{
+
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+border-bottom-left-radius: 5px;
+border-bottom-right-radius: 5px;
+box-shadow: 0 7px 14px 0 rgb(59 65 94 / 10%), 0 3px 6px 0 rgb(0 0 0 / 7%);  
+height: auto;
+border: 0px;
+
+
+}
+
+
+.baxodir_account_card_header{
+	padding: 13px;
+}
+
+
+.baxodir_account_standart_text_bold{
+	font-family: 'Baloo Chettan 2', cursive;
+}
+
+
+.baxodir_account_standart_text{
+	font-family: 'Baloo Chettan 2', cursive;
+}

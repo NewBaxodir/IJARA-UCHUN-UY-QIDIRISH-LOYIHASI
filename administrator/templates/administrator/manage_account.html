@@ -1,0 +1,293 @@
+{% extends 'base-admin' %}
+
+
+
+{% block title %} 
+<title> Home | Search Hotel </title> 
+{% endblock %}
+{% load static %}
+
+
+{% block style %} 
+<link rel="stylesheet" type="text/css" href="{% static 'style/account.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<header class="" style="border-radius: 0px;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm p-3 bg-body rounded-start">
+    <div class="container-fluid">
+      <a class="navbar-brand landing-brand" href="{% url 'home' %}">
+        <i class="fas fa-key" style="color: rgb(44,26,120); font-size: 25px;"></i>
+      <!-- <img class="mb-1" src="{% static 'images/logo.png' %}" alt="" width="40" height="40"> -->
+      House 
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <!-- **************************** -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+             
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <li class="nav-item mx-3"><a class="nav-link active" aria-current="page" href="{% url 'account' %}">Qidiruv</a>
+      </li>
+      <li class="nav-item mx-3"><a class="nav-link active" aria-current="page" href="{% url 'announcement' %}">E'lonlar</a>
+       </li>
+
+
+       <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'announcement' %}" style="margin-right: 0; padding-right: 0px;"><i class="fas fa-user-circle" style="font-size: 25px; color: rgb(44,26,120);"></i></a>
+       </li>
+
+      <li class="nav-item dropdown ms-auto"> 
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <font class="fw-normal" color="black" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;"> {{request.user.last_name}} {{request.user.first_name}}</font></a>
+
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="z-index: 2;">
+
+      <li><a class="dropdown-item baxodir_account_standart_text_bold" href="{% url 'settings' %}">Hisob sozlamalari</a></li>
+       
+      <li><a class="dropdown-item" href="{% url 'manage_account' %}">E'lonlarni yangilash</a></li>
+            
+      <li><a class="dropdown-item" href="#">Uy yoqdi</a></li>
+            
+      <li><a class="dropdown-item" href="">Tizim haqida</a></li>
+
+      <li><a class="dropdown-item" href="">Yordam</a></li>
+            
+      <li><a class="dropdown-item" href="{% url 'logout' %}">Tizimdan chiqish</a></li>
+      </ul>
+    </li>
+    </ul>
+      </div>
+
+    
+      </div>
+  </nav>
+</header>
+  
+
+
+<!-- All Ans -->
+<form method="post" enctype="multipart/form-data">
+<div class="container-fluid mt-5">
+<div class="container">
+
+  
+<div class="row">
+
+
+   {% csrf_token %}
+{{ formset.management_form }}
+    {% for form in formset %}
+<div class="col-lg-6">
+<div class="baxodir_account_card bg-white">
+<div class="baxodir_account_card_header">
+<h5 class="card-title baxodir_account_standart_text_bold">E'lon</h5>
+</div>
+<div class="card-body">
+
+<div class="row">
+
+  <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+  <div class="mb-3">
+  <label for="exampleInputEmail1" class="form-label">Uy manzili</label>
+  {{ form.address }}
+  </div>
+  </div>
+
+  <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+  <div class="mb-3">
+  <label for="exampleInputEmail1" class="form-label">Telefon raqam</label>
+  {{ form.phone_numer }}
+  </div>
+  </div>
+
+
+  <!-- ****************************************** -->
+  <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+  <div class="mb-3">
+  <label for="exampleInputEmail1" class="form-label">Vaqt</label>
+  {{ form.mode }}
+  </div>
+  </div>
+
+  <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+  <div class="mb-3">
+  <label for="exampleInputEmail1" class="form-label">Kim/l?</label>
+  {{ form.kimlar }}
+  </div>
+  </div>
+
+
+  <!-- ****************************************** -->
+  <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+  <div class="mb-3">
+  <label for="exampleInputEmail1" class="form-label">Odamlar soni/oilali</label>
+  {{ form.kishilar }}
+  </div>
+  </div>
+
+  <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+  <div class="mb-3">
+  <label for="exampleInputEmail1" class="form-label">Uy bo'sh/band</label>
+  {{ form.topshirilgan }}
+  </div>
+  </div>
+
+
+      <!-- ****************************************** -->
+      <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">P.Tan</label>
+        {{ form.moneyc }}
+        </div>
+      </div>
+
+      <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Qiymat</label>
+        {{ form.money }}
+        </div>
+      </div>
+
+
+      <!-- ****************************************** -->
+      <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">P.Tan</label>
+        {{ form.house_image }}
+        </div>
+      </div>
+
+      <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Uyingizdagi tartiblarni belgilang</label>
+        {{ form.tartiblar }}
+        </div>
+      </div>
+
+      <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Ijaraga berilgan uyda ish bo'lish holati</label>
+        {{ form.ish }}
+        </div>
+      </div>
+
+
+      <!-- ****************************************** -->
+      <div class="row">
+      <h6 style="color: #00864e; font-family: 'Baloo Chettan 2', cursive;">Iste'mol ehtiyojlari</h6>
+      <!-- ************************************************** -->
+      <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Sovuq suv</label>
+        {{ form.sovuq_suv }}
+        </div>
+      </div>
+
+      <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Issiq suv</label>
+        {{ form.issiq_suv }}
+        </div>
+      </div>
+
+
+      <!-- ************************************************** -->
+      <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Svet</label>
+        {{ form.svet }}
+        </div>
+      </div>
+
+      <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Gaz</label>
+        {{ form.gaz }}
+        </div>
+      </div>
+      </div>
+
+      <div class="row">
+      <h6 style="color: #00864e; font-family: 'Baloo Chettan 2', cursive;">Elektron vositalari</h6>
+      <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Wifi</label>
+        {{ form.wifi }}
+        </div>
+      </div>
+
+      <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Sovutgich</label>
+        {{ form.sovutgich }}
+        </div>
+      </div>
+
+      <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Kondisioner</label>
+        {{ form.kondisioner }}
+        </div>
+      </div>
+
+      <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Qo'shimchalar qo'shishingiz mumkun</label>
+        {{ form.additional3 }}
+        </div>
+      </div>
+      </div>
+
+
+
+      <div class="row">
+      <h6 style="color: #00864e; font-family: 'Baloo Chettan 2', cursive;">Gigiyena sharaoidlar</h6>
+      <!-- ************************************* -->
+      <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Hojat</label>
+        {{ form.hojat }}
+        </div>
+      </div>
+
+      <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Hojat</label>
+        {{ form.hammom }}
+        </div>
+      </div>
+      </div>
+
+
+
+      <div class="row">
+      <h6 style="color: #00864e; font-family: 'Baloo Chettan 2', cursive;">Xavfsizlik tizimi</h6>
+      <!-- ************************************* -->
+      <div class="col-lg-6" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Xafsizlik</label>
+        {{ form.xafsiz }}
+        </div>
+      </div>
+      </div>
+
+     <button type="submit" class="btn btn-primary" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">Tasdiqlash</button>
+  </div>
+
+  
+</div>
+</div>
+</div>
+ {% endfor %}
+</div>
+</div>
+</div>
+</form>
+
+
+
+
+{% endblock %}

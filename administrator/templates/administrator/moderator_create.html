@@ -1,0 +1,166 @@
+{% extends 'administrator/base_admin.html' %}
+
+{% load static %}
+
+
+
+
+
+{% block elon %}
+<div id="accordion">
+<li class="collapse_list" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+<i class="fas fa-bullhorn"></i></i>
+<span class="text_collapse">E'lonlar</span> </li>
+<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+<ul class="small_menu">
+<a href="{% url 'admin_announcements' %}"><li>E'lonlar</li></a>
+</ul>
+</div>
+</div>
+{% endblock %}
+
+
+
+{% block administrator %}
+<div id="accordion">
+<li class="collapse_list" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne"><i class="fas fa-user-shield"></i><span class="text_collapse">Administrator</span> </li>
+<div id="collapseThree" class="collapse show"  data-parent="#accordion">
+        
+<ul class="small_menu">
+
+<a href="{% url 'admin_announcers' %}"><li>Hisoblar</li></a>
+
+<a href="{% url 'moderators' %}"><li style="color: #568fed;">Moderatorlar</li></a>
+
+</ul>
+
+</div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- CONTAINER  -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+{% block container %}
+
+<div class="container-fluid">
+<div class="container">
+    
+<div class="col-lg-12">
+<h5>Moderator yaratish sahifasi</h5>
+</div>
+
+<form class="form-signin" action="{% url 'moderator_create' %}" method="POST" novalidate enctype="multipart/form-data">
+{% csrf_token %}
+
+
+
+<div class="row mt-4" >
+  
+<div class="col-lg-6">
+  <div class="mb-3">
+  <label for="exampleInputEmail1" class="form-label" style="display: block;">Familya</label>
+ {{form.last_name}}  {{form.last_name.errors}} 
+ </div>
+</div>
+
+
+
+<div class="col-lg-6">
+  <div class="mb-3">
+  <label for="exampleInputEmail1" class="form-label" style="display: block;">Ism</label>
+  {{form.first_name}} {{form.first_name.errors}} 
+  </div>
+</div>
+
+<div class="col-lg-6">
+  <div class="mb-3">
+  <label for="exampleInputEmail1" class="form-label" style="display: block;">Otasini ismi</label>
+  {{form.father_name}} {{form.father_name.errors}} 
+  </div>
+</div>
+
+<div class="col-lg-6">
+  <div class="mb-3">
+  <label for="exampleInputEmail1" class="form-label" style="display: block;">Email</label>
+  {{form.email}} {{form.email.errors}} 
+  </div>
+</div>
+
+
+<div class="col-lg-6">
+  <div class="mb-3">
+  <label for="exampleInputEmail1" class="form-label" style="display: block;">Telefon.N</label>
+  {{form.phone_numer}} {{form.phone_numer.errors}} 
+  </div>
+</div>
+
+
+ <div class="col-lg-6">
+  <label for="floatingTextarea">Suratni yuklang</label>
+  <div class="input-group mb-3" style="margin-top: 7px;">
+  {{form.admin_image}} {{form.admin_image.errors}} 
+  </div>
+</div>
+
+
+<div class="col-lg-12">
+  <div class="mb-3">
+  <label for="exampleInputEmail1" class="form-label" style="display: block;">Login</label>
+  {{form.username}}  {{form.username.errors}} 
+  </div>
+</div>
+
+<div class="col-lg-6">
+  <div class="mb-3">
+  <label for="exampleInputEmail1" class="form-label" style="display: block;">Parol</label>
+   {{form.password1}}  {{form.password1.errors}} 
+  </div>
+</div>  
+
+<div class="col-lg-6">
+  <div class="mb-3">
+  <label for="exampleInputEmail1" class="form-label" style="display: block;">Tekshiruv Paroli</label>
+  {{form.password2}}   {{form.password2.errors}} 
+  </div>
+</div>  
+
+
+ <button type="submit" class="btn btn-primary">Tasdiqlash va Yaratish</button>
+
+</div>
+
+
+
+
+
+
+</div>
+</div>
+</form>
+
+
+
+{% endblock %}
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- CONTAINER  -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+
+
+
+
+
+
+
+
+

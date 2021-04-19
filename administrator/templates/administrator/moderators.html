@@ -1,0 +1,168 @@
+{% extends 'administrator/base_admin.html' %}
+
+{% load static %}
+
+
+
+
+{% block elon %}
+<div id="accordion">
+<li class="collapse_list" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+<i class="fas fa-bullhorn"></i></i>
+<span class="text_collapse">E'lonlar</span> </li>
+<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+<ul class="small_menu">
+<a href="{% url 'admin_announcements' %}"><li>E'lonlar</li></a>
+</ul>
+</div>
+</div>
+{% endblock %}
+
+
+
+{% block administrator %}
+<div id="accordion">
+<li class="collapse_list" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne"><i class="fas fa-user-shield"></i><span class="text_collapse">Administrator</span> </li>
+<div id="collapseThree" class="collapse show"  data-parent="#accordion">
+        
+<ul class="small_menu">
+
+<a href="{% url 'admin_announcers' %}"><li>Hisoblar</li></a>
+
+<a href="{% url 'moderators' %}"><li style="color: #568fed;">Moderatorlar</li></a>
+
+</ul>
+
+</div>
+</div>
+{% endblock %}
+
+
+
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- CONTAINER  -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+{% block container %}
+
+<div class="container-fluid">
+  <div class="container">
+    
+    <div class="col-lg-12 mt-4">
+    <h5>Moderatorlar</h5>
+    </div>
+
+    <div class="mt-4">
+      <a href="{% url 'moderator_create' %}">
+    <button type="button" class="btn btn-primary btn-sm">Moderator qo'shish</button>	
+      </a>
+    </div>
+
+    <table class="table table-hover mt-4">
+      <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Familya</th>
+        <th scope="col">Ism</th>
+        <th scope="col">Email</th>
+        <th scope="col">Telefon.N</th>
+        <th scope="col">R.Sana</th>
+        <th scope="col">Hisob</th>
+        <th scope="col">O'chir</th>
+        <th scope="col">O'chir</th>
+      </tr>
+      </thead>
+
+    
+    {% for a in useradminpage %}
+    {% if user.is_active and user.is_staff and user.is_superuser %}
+    <tbody>
+    <tr>
+      <td>{{a.user.id}}</td>
+      <td>{{a.user.last_name}}</td>
+      <td>{{a.user.first_name}}</td>
+      <td>{{a.user.email}}</td>
+      <td>{{a.phone_numer}}</td>
+      <td>{{a.pub_date}}</td>
+      <td><button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#user{{a.user.id}}"><i class="fas fa-eye"></i></button></td>
+      <td>
+        <a href="{% url 'moderator_update' a.user.id %}">
+        <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
+        </a>
+      </td>
+      <td>
+        <a href="{% url 'moderator_delete' a.user_id %}">
+        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="user{{a.user.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+  <div class="modal-content">
+  <div class="modal-header">
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body" style="border: 1px solid red;">
+  
+  <div class="container">
+  <div class="row">
+  <div class="col-sm col-lg-3" style="border: 1px solid red;">
+   <img src="{% if a.admin_image.url != 'None' %}{{a.admin_image.url}}{% else %} Surat yo'q {% endif %}" class="img-fluid" width="150" alt="...">
+  </div>
+  <div class="col-sm col-lg-9" style="border: 1px solid red;">
+    
+  <p class="">Familya: {{a.user.last_name}}</p>
+  <p class="">Ism: {{a.user.first_name}}</p>
+
+  </div>
+  
+  </div>
+  </div>
+
+    <div class="container">
+  <div class="row">
+  <div class="col-sm col-lg-12" style="border: 1px solid red;">
+    
+  <p class="">Emai    {{a.father_name}} </p>
+  <p class="">Emai    {{a.user.email}} </p>
+  <p class="">Telefon.N: {{a.phone_numer}}
+  <p class="">Login: {{a.user}}
+  <p class="">Parol: {{a.user.password}}
+  <p class=""> {{a.pub_date}} </p>
+  </div>
+  
+  </div>
+  </div>
+
+
+
+  </div>
+  <div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+  </div>
+  </div>
+  </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+
+
+  </table>
+
+
+
+  </div>
+
+</div>
+
+
+
+
+{% endblock %}
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- CONTAINER  -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->

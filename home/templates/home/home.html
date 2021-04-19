@@ -1,0 +1,349 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %} 
+<title> SEARCH | UY QIDIRISH </title> 
+{% endblock %}
+{% load static %}
+
+
+{% block content %}
+<style type="text/css">
+  
+.search_style{
+padding: 12px;
+border-top-left-radius: 0px;
+border-top-right-radius: 0px;
+border-bottom-left-radius: 0px;
+border-bottom-right-radius: 0px;
+
+}
+
+.select_style{
+padding: 12px;
+border-top-left-radius: 20px;
+border-top-right-radius: 0px;
+border-bottom-left-radius: 20px;
+border-bottom-right-radius: 0px;
+}
+
+.firs_style{
+  padding-right: 0px;
+}
+
+.second_style{
+  padding-left: 0px;
+}
+
+.button_style{
+
+  height: 50px; 
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  font-family: 'Baloo Chettan 2';
+  font-size: 18px;"
+}
+
+form{
+
+  background-color: white;
+  padding: 8px;
+
+}
+
+.tizimga_kirish{
+  margin-right: 15px;
+}
+
+.interval_style{
+  display: block;
+}
+
+
+@media screen and (max-width: 767px) {
+
+.input_style{
+  height: 50px; 
+  border-top-left-radius: 20px; 
+  border-bottom-left-radius: 20px; 
+  border-bottom-right-radius: 20px; 
+  border-top-right-radius: 20px; 
+  font-family: 'Baloo Chettan 2'; 
+  font-size: 18px;
+}
+
+
+.button_style{
+  margin-top: 20px;
+  height: 50px; 
+  border-top-left-radius: 20px; 
+  border-bottom-left-radius: 20px; 
+  border-bottom-right-radius: 20px; 
+  border-top-right-radius: 20px;
+  font-family: 'Baloo Chettan 2';
+  font-size: 18px;"
+
+}
+.second_style{
+  padding-right: 0px;
+}
+
+form{
+background-color: transparent;
+}
+
+.uy_style{
+  text-align: center;
+}
+
+.tizimga_kirish{
+  margin-right: 0px;
+  margin-bottom: 15px;
+}
+
+
+.search_style{
+padding: 12px;
+border-top-left-radius: 20px;
+border-top-right-radius: 20px;
+border-bottom-left-radius: 20px;
+border-bottom-right-radius: 20px;
+margin-top: 15px;
+
+}
+
+.firs_style{
+  padding-left: 0px;
+}
+
+.select_style{
+padding: 12px;
+border-top-left-radius: 20px;
+border-top-right-radius: 20px;
+border-bottom-left-radius: 20px;
+border-bottom-right-radius: 20px;
+}
+
+.interval_style{
+  display: none;
+}
+
+
+}
+
+
+</style>
+
+
+
+
+<header class="" style="border-radius: 0px; font-family: 'Baloo Chettan 2';">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm p-3 bg-body rounded-start">
+    <div class="container-fluid">
+      
+    <a class="navbar-brand landing-brand" href="{% url 'home' %}">
+    <i class="fas fa-key" style="color: rgb(44,26,120); font-size: 25px;"></i>
+      <!-- <img class="mb-1" src="{% static 'images/logo.png' %}" alt="" width="40" height="40"> -->
+      Slux.uz </a>
+      
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+      <!-- **************************** -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+    <li class="nav-item mx-0">
+    <a class="nav-link active" aria-current="page" href="#"  style="font-size: 18px;">Tizim haqida</a>
+      </li>
+
+      <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#" style="font-size: 18px;">Yordam</a>
+      </li>
+
+
+      <a href="{% url 'sign_in' %}" class="btn btn-primary active btn-lg mr-1 tizimga_kirish"style=" font-size: 18px;">Tizimga kirish</a>
+
+      <a href="{% url 'sign_up' %}" class="btn btn-primary active btn-lg mr-1" style="font-size: 18px;">Ro'yxatdan o'tish</a>
+  </ul>
+  </div>
+
+    
+  </div>
+  </nav>
+</header>
+
+
+
+
+<div class="backgrou_image" style="background-image: url({% static 'images/bac46.jpg'%}); width: 100%;  height: 100vh;  background-position: center;  background-repeat: no-repeat;  background-size: cover;  transition: 5s;">
+  
+<div class="container-fluid interval_style" style="height: 150px;">
+</div>
+
+<div class="row">
+<div class="col-xl-10 m-auto">
+<div class="text-lg-left" align="left">
+<h1 class="display-3 font-weight-bold text-shadow uy_style" style="font-size: 40px; color: white;">Samarqand viloyati ijaraga Uy qidirish tizimi</h1>
+</div>
+   
+
+
+<form class="mt-5 col-md-12 col-lg-10 rounded-pill" action="{% url 'search' %}"  type="GET">
+<div class="input-group">
+<div class="container">
+<div class="row">
+
+       
+<div class="col-12 col-sm-12 col-md-8 col-lg-12">
+
+<div class="row">
+    
+  <div class="col-sm col-lg-4 firs_style">
+    <select name="region" class="form-control select_style">
+    <option value="">Hududni tanlang</option>
+    <option value="Samarqand shahri">Samarqand shahri</option>
+    <option value="Samarqand tumani">Samarqand tumani</option>
+    <option value="Toyloq tumani">Toyloq tumani</option>
+    <option value="Bulungʻur tumani">Bulungʻur tumani</option>
+    <option value="Jomboy tumani">Jomboy tumani</option>
+    <option value="Urgut tumani">Urgut tumani</option>
+    <option value="Pastdargʻom tumani">Pastdargʻom tumani</option>
+
+    <option value="Payariq tumani">Payariq tumani</option>
+    <option value="Oqdaryo tumani">Oqdaryo tumani</option>
+    <option value="Ishtixon tumani">Ishtixon tumani</option>
+
+    <option value="Qoʻshrabot tumani">Qoʻshrabot tumani</option>
+    <option value="Kattaqoʻrgʻon tumani">Kattaqoʻrgʻon tumani</option>
+    <option value="Nurobod tumani">Nurobod tumani</option>
+    <option value="Narpay tumani">Narpay tumani</option>
+    <option value="Paxtachi tumani">Paxtachi tumani</option>
+
+    </select>
+  </div>
+
+  <div class="col-sm col-lg-6 firs_style second_style">
+    <input type="search" name="address" class="form-control search_style" placeholder="Mahalla yoki ko'cha nomlari bo'yicha qidiring" style="font-family: 'Baloo Chettan 2';">
+  </div>
+
+
+  <div class="col-sm col-lg-2 second_style">
+    <button type="submit" value="Go" class="btn btn btn-primary active col-12 col-lg-12 button_style" type="button" id="button-addon2">Qidirish</button>
+  </div>
+
+</div>
+
+</div>
+
+<style type="text/css">
+select{
+  font-family: 'Baloo Chettan 2'; font-size: 18px;
+  }
+select option{
+  font-family: 'Baloo Chettan 2'; font-size: 18px;
+  }
+</style>
+
+<div class="col-12 col-sm-12 col-md-2 col-lg-2" style="margin-left: 0px; padding-left: 0px; margin-right: 0px; padding-right: 0px;">
+<div class="input-group-append">
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<div style="background-color: #f8f9fa !important; height: 60px;">
+</div>
+
+
+<section class="py-6 bg-gray-100 " style="background-color: #f8f9fa !important;">
+<div class="container">
+
+<div class="text-center pb-lg-4">
+<p class="subtitle text-secondary" style="font-family: 'Baloo Chettan 2'; font-size: 16px;">Biz vaqtingizni tejashda yordam beramiz</p>
+<h2 class="mb-5" style="font-family: 'Baloo Chettan 2'; font-size: 30px;">Biz bilan qanday imkoniyatlarga ega bo'lishingiz mumkun</h2>
+</div>
+
+<div class="row">
+<div class="col-lg-4 mb-3 mb-lg-0 mt-5 text-center">
+<div class="px-0 px-lg-3">
+<div class="icon-rounded bg-primary-light mb-3">
+  <i class="fas fa-map-marked-alt" style="font-size: 26px;"></i>
+</div>
+
+<h3 class="h5" style="font-family: 'Baloo Chettan 2'; font-size: 20px;">Ajoyib ijarani toping</h3>
+<p class="text-muted" style="font-family: 'Baloo Chettan 2'; font-size: 15px;">Ajoyib uy qidiriyapsizmi, bizning saytyimizda bunday imkoniyat bor, Uylarni qidirishda xaritalardan keng imkoniyat bilan foydalaning</p>
+</div>
+</div>
+
+
+
+<div class="col-lg-4 mb-3 mb-lg-0 mt-5 text-center">
+<div class="px-0 px-lg-3">
+<div class="icon-rounded bg-primary-light mb-3">
+ <i class="fas fa-mobile-alt" style="font-size: 26px;"></i>
+</div>
+
+
+<h3 class="h5" style="font-family: 'Baloo Chettan 2'; font-size: 20px;">Qulay platformdan foydalaning</h3>
+<p class="text-muted" style="font-family: 'Baloo Chettan 2'; font-size: 15px;">Mobil ilovamizni yuklab oling va yanada qulay foydalanishni boshlang</p>
+</div>
+</div>
+
+
+<div class="col-lg-4 mb-3 mb-lg-0 mt-5 text-center">
+<div class="px-0 px-lg-3">
+<div class="icon-rounded bg-primary-light mb-3">
+  <i class="fas fa-phone" style="font-size: 26px;"></i>
+</div>
+
+
+
+<h3 class="h5" style="font-family: 'Baloo Chettan 2'; font-size: 20px;">Ishonchli buyurtma qiling
+</h3>
+
+<p class="text-muted" style="font-family: 'Baloo Chettan 2'; font-size: 15px;">Sayt malumotlariga ishonishingiz mumkun. Biz bilan hoxlagan paytingizda aloqaga chiqishingiz mumkun 
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<div style="height: 100px;">
+</div>
+
+ 
+<script>
+
+var form = document.querySelector("form");
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  var address = form.querySelector("input[type=search]");
+  address.value = "" + address.value;
+  form.submit();
+});
+
+</script>
+
+{% endblock %}
+
+
+
+

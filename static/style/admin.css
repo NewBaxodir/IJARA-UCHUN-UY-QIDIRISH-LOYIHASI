@@ -1,0 +1,128 @@
+.admin_announcements_border{
+	border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+border-bottom-left-radius: 5px;
+border-bottom-right-radius: 5px;
+box-shadow: 0 7px 14px 0 rgb(59 65 94 / 10%), 0 3px 6px 0 rgb(0 0 0 / 7%);  
+height: auto;
+border: 0px;
+}
+
+
+.admin_announcements_padding{
+	padding: 13px;
+}
+
+
+.baxodir_account_standart_text_bold{
+	font-family: 'Baloo Chettan 2', cursive;
+}
+
+
+/*************************************************************************/
+input:focus, textarea:focus, select:focus{
+        outline: none;
+}
+table td{
+font-family: 'Andika', sans-serif;
+font-family: 'Baloo Chettan 2', cursive;
+font-family: 'Open Sans', sans-serif;
+font-family: 'PT Sans Caption', sans-serif;
+font-family: 'Source Sans Pro', sans-serif;
+font-size: 13px;
+}
+
+
+
+
+.menuopen{
+  width: 19%;
+  height: 1000px;
+  background-color: rgb(41,48,66);
+}
+
+.close{ 
+  display: none;
+}
+
+
+.info-open{
+
+  width: 81%;
+}
+
+.info-close{
+  
+  width: 100%;
+}
+
+.big_menu{
+  padding-left: 0;
+  margin-left: 0;
+  margin-left: 15px;
+}
+
+.small_menu{
+  margin-left: 13px;
+}
+
+.small_menu li{
+ padding-top: 10px;
+ padding-bottom: 10px;
+ color: #ced4da;
+ list-style-type: none;
+}
+
+
+ul li{
+
+
+}
+.paragraf_list{
+  list-style: ;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 14px;
+  padding: 15px;
+  margin-left: 0px;
+  padding-left: 0px;
+  list-style-type: none;
+  color: #ced4da;
+}
+
+.collapse_list{
+  font-family: 'Public Sans', sans-serif;
+  padding: 10px;
+  list-style-type: none;
+  color: #e9ecef;
+}
+
+.text_collapse{
+  margin-left: 20px;
+}
+
+
+.sidebar-brand{
+  color: white;
+  text-decoration: none;
+  font-family: 'Public Sans', sans-serif;
+}
+
+a{
+  text-decoration: none;
+}
+
+.open_menu{
+  color: blue;
+}
+
+
+
+
+
+.info-open-navbar{
+  border-bottom: 0;
+    box-shadow: 0 0 2rem 0 rgb(41 48 66 / 10%);
+}
+
+
+

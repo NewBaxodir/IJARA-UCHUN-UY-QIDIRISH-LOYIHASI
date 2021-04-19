@@ -1,0 +1,337 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %} 
+<title> Home | Search Hotel </title> 
+{% endblock %}
+{% load static %}
+
+
+
+{% block style %} 
+<link rel="stylesheet" type="text/css" href="{% static 'style/announcements.css' %}">
+{% endblock %}
+
+
+
+{% block content %}
+<style type="text/css">
+
+@media screen and (max-width: 767px) {
+.menu_style{
+  width: 100%;
+}
+
+.profile_style{
+  display: none;
+}
+
+}
+
+</style>
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- HEADER ************************************************************** -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<header style="border-radius: 0px;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm p-3 bg-body rounded-start">
+    <div class="container-fluid">
+      <a class="navbar-brand landing-brand account_text" href="{% url 'account' %}">
+        <i class="fas fa-key account_logatip"></i>
+      <!-- <img class="mb-1" src="{% static 'images/logo.png' %}" alt="" width="40" height="40"> -->
+      House 
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <!-- **************************** -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+             
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+      <li class="nav-item account_menu_text18"><a class="nav-link" aria-current="page" href="{% url 'account' %}">Qidiruv</a>
+      </li>
+
+        <li class="nav-item account_menu_text18"><a class="nav-link active" aria-current="page" href="{% url 'announcement' %}">E'lonlar</a>
+        </li>
+
+        {% if request.user.householder.householder_image != "" %}
+        <li class="nav-item profile_style"><a class="nav-link active" aria-current="page" href="{% url 'announcement' %}" style="margin-right: 0; padding-right: 0px;"><img src="{{request.user.householder.householder_image.url}}" alt="mdo" width="32" height="32" class="rounded-circle"></a>
+        </li>
+        {% else %}
+        <li class="nav-item profile_style"><a class="nav-link active" aria-current="page" href="{% url 'announcement' %}" style="margin-right: 0; padding-right: 0px;"><i class="fas fa-user-circle account_logatip"></i></a>
+        </li>
+        {% endif %}
+
+
+      <li class="nav-item dropdown ms-auto account_menu_text18 menu_style"> 
+       
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <font class="fw-normal" color="black"> {{request.user.last_name}} {{request.user.first_name}}</font></a>
+
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="z-index: 2; font-size: 18px;">
+          <li><a class="dropdown-item baxodir_account_standart_text_bold" href="{% url 'settings' %}"><i class="fas fa-user-circle account_logotip_color"></i> Hisob sozlamalari</a></li>
+
+          <li><a class="dropdown-item" href="#"><i class="fab fa-gratipay account_logotip_color"></i> Uy yoqdi</a></li>
+
+          <li><a class="dropdown-item" href=""><i class="fas fa-question-circle account_logotip_color"></i> Yordam</a></li>
+
+          <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt account_logotip_color"></i> Tizimdan chiqish</a></li>
+
+        </ul>
+
+    </li>
+    </ul>
+
+  </div>    
+  </div>
+  </nav>
+</header>
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<!-- END HEADER ********************************************************** -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+  
+
+
+
+
+
+
+<div class="header mt-5">
+<div class="container-fluid">
+<div class="container">
+<div class="header-body">
+<div class="row align-items-end">
+<div class="col">
+<h6 class="header-pretitle text-muted" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;">Sizning </h6>
+<h3 class="header-title" style="font-family: 'Baloo Chettan 2', cursive; font-size: 25px;">
+  E'lonlaringiz
+</h3>
+ </div>
+<div class="col-auto">
+
+<a href="#" class="btn btn-primary  lift js-create-book" data-url="" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;"><i class="fas fa-plus-square"></i> Mehmonxona e'loni yaratish</a>
+
+<a href="{% url 'create' %}" class="btn btn-primary  lift js-create-book" data-url="" style="font-family: 'Baloo Chettan 2', cursive; font-size: 16px;"><i class="fas fa-plus-square"></i> Umumiy e'lon yaratish</a>
+
+</div>
+</div> 
+</div> 
+<hr style="background: rgb(148,152,161);">
+</div>
+</div>
+</div>
+
+
+<div class="container-fluid">
+<div class="container">
+<div class="row">
+
+<div class="col-lg-12">
+
+
+<!-- *************************** -->
+{% for f in my_announcement %}
+<div class="baxodir_account_card bg-white mb-5">
+<div class="baxodir_account_card_header">
+<a href="http://maps.google.com/?q={{f.region}} {{f.address}}" target="_blank">
+<h5 class="card-title baxodir_account_standart_text_bold" style="font-size: 18px;"><i class="fas fa-map-marker-alt"></i> {{f.region}} {{f.address}}</h5>
+</a>
+
+
+</div>
+
+
+<div class="card-body">
+<div class="row">
+ 
+  <div class="col-lg-3">
+      <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+  {% for p in photo %}
+  {% if f.id == p.announcements_id %}
+  <div class="carousel-item active" data-bs-toggle="modal" data-bs-target="#Baxodir{{f.id}}">
+  <img src="{% if p.image != 'None' %}{{p.image.url}}{% endif %}" class="d-block w-100" alt="...">
+  </div>
+
+  {% endif %}
+  {% endfor %}
+  </div>
+  </div>
+<!-- ****************** -->
+
+<div class="row mt-2 baxodir_account_standart_text_bold">
+  <div class="col-4">
+  <button type="button" class="btn btn-light btn-sm ui button like-btn{{f.id}}" style="padding: 0px 10px 0px 10px; background: #e0eafc; color: blue;">
+         Yoqganlar
+  </button>
+  
+</div>
+<div class="col-2">
+  <button type="submit" class="btn btn-light btn-sm" style="padding: 0px 10px 0px 10px; background: #e0eafc; color: blue;"><span class="like-count{{f.id}}">{{f.num_likes}}</span></button>
+</div>
+</div>
+
+<!-- ******************* -->
+  <!-- Modal -->
+  <div class="modal fade" id="Baxodir{{f.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+  <div class="modal-content">
+  <div class="modal-header">
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  {% for p in photo %}
+  {% if f.id == p.announcements_id %}
+  <img src="{{p.image.url}}" class="img-fluid" alt="...">
+  {% endif %}
+  {% endfor %}
+  <div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  <div class="col-lg-7">
+  <div class="row"> 
+  
+  <div class="col-lg-6">
+    <ul class="list-unstyled baxodir_account_standart_text_bold">
+    <li><span class="" style="font-weight: 500;">Iste'mol ehtiyojlari</span>
+    <ul style="list-style: none; padding-left: 10px; ">
+    <li><i class="fas fa-hand-holding-water" style="color: rgb(29,114,194);"></i> {{f.sovuq_suv}}
+      </li>
+    <li><i class="fas fa-hand-holding-water" style="color: rgb(237,121,165);"></i> {{f.issiq_suv}}</li>
+    <li><i class="fas fa-lightbulb" style="color: rgb(240,234,132);"></i> {{f.svet}}</li>
+    <li><i class="fas fa-fire" style="color: rgb(222,7,7);"></i> {{f.gaz}}</li>
+    </ul>
+    </li>
+    </ul>
+
+    <ul class="list-unstyled baxodir_account_standart_text_bold">
+    <li><span class="" style="font-weight: 500;">Iste'mol ehtiyojlari</span>
+    <ul style="list-style: none; padding-left: 10px; ">
+    <li><i class="fas fa-wifi" style="color: rgb(7,32,222);"></i> {{f.wifi}}
+      </li>
+    <li><i class="fas fa-columns" style="color: rgb(5,115,14);"></i> {{f.sovutgich}}</li>
+    <li><i class="fas fa-fan" style="color: rgb(79,243,255);"></i> {{f.kondisioner}}</li>
+    </ul>
+    </li>
+    </ul>
+
+  </div>
+  <div class="col-lg-6">
+     <ul class="list-unstyled baxodir_account_standart_text_bold">
+    <li><span class="" style="font-weight: 500;">Gigiyena sharoitlar</span>
+    <ul style="list-style: none; padding-left: 10px; ">
+    <li><i class="fas fa-bath"></i> {{f.hammom}}</li>
+    </ul>
+    </li>
+    </ul>
+
+
+     <ul class="list-unstyled baxodir_account_standart_text_bold">
+    <li><span class="" style="font-weight: 500;">Xavfsizlik tizimi</span> 
+    <ul style="list-style: none; padding-left: 10px; ">
+    <li><i class="fas fa-satellite-dish" style="color: rgb(7,32,222);"></i> {{f.xafsiz}}
+      </li>
+    </ul>
+    </li>
+    </ul>
+
+      <ul class="list-unstyled baxodir_account_standart_text_bold">
+    <li><span class="" style="font-weight: 500;">Kimlar uchun</span> 
+    <ul style="list-style: none; padding-left: 10px; ">
+      {% if f.kimlar == "erkak" %}
+    <li><i class="fas fa-male" style="font-size: 20px;"></i> {{f.kimlar}}
+      </li>
+      {% elif f.kimlar == "ayol" %}
+      <li><i class="fas fa-female" style="font-size: 20px;"></i> {{f.kimlar}} Joy. {{f.kishilar}}
+      </li>
+      {% else %}
+      <li><i class="fas fa-male" style="font-size: 20px;"></i><i class="fas fa-child" style="font-size: 20px;"></i><i class="fas fa-female" style="font-size: 20px;"></i> {{f.kimlar}}
+      </li>
+      {% endif %}
+      <li><i class="fas fa-home"></i> {{f.topshirilgan}} / {{f.floor}} / {{f.floormany}} / {{f.rooms}}
+      </li>
+
+
+    </ul>
+    </li>
+    </ul>
+
+  </div>
+  
+  </div>
+  </div>
+
+  
+
+<div class="col-lg-2">
+   <a href="tel:{{f.phone_numer}}">
+  <div class="p-2 mb-2 bg-primary fw-bold rounded text-white baxodir_account_standart_text_bold" style="font-size: 15px;">{{f.phone_numer}}
+  </div>
+  </a>
+
+  <div class="p-2 mb-2 bg-primary fw-bold rounded mt-3 text-white baxodir_account_standart_text_bold" style="font-size: 15px;">{{f.mode}}
+  </div>
+
+ <div class="p-2 mb-2 bg-primary fw-bold rounded mt-3 text-white baxodir_account_standart_text_bold" style="font-size: 15px;">{{f.money}}  {{f.moneyc}}<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+  </div>
+
+  <div data-bs-toggle="collapse" href="#hause{{f.id}}" role="button" aria-expanded="false" aria-controls="collapseExample" class="p-2 mb-2 bg-primary fw-bold rounded mt-3 text-white baxodir_account_standart_text_bold" text-white style="font-size: 15px;">Qo'shimcha malumot
+  </div>
+</div>
+
+
+<!-- ****** -->
+<div class="collapse" id="hause{{f.id}}">
+  <div class="card card-body">
+
+      <div class="baxodir_account_standart_text_bold">
+      <i class="fas fa-gavel"></i> - {{ f.tartiblar }}
+    </div>
+    <div class="baxodir_account_standart_text_bold">
+      <i class="fas fa-briefcase"></i> - {{ f.ish }}
+    </div>
+    <br>
+    <div class="baxodir_account_standart_text_bold">
+     Iste'mol ehtiyojlari qo'shimcha: - {{ f.additional2 }}
+    </div>
+    <div class="baxodir_account_standart_text_bold">
+     Elektron vositalari qo'shimcha: - {{ f.additional3 }}
+    </div>
+    <div class="baxodir_account_standart_text_bold">
+     Gigiyena sharaoidlar qo'shimcha: - {{ f.additional4 }}
+    </div>
+    <div class="baxodir_account_standart_text_bold">
+     Xavfsizlik tizimi qo'shimcha: - {{ f.additional5 }}
+    </div>
+
+
+  </div>
+</div>
+<!-- ****** -->
+
+
+
+</div>
+<a href="{% url 'images_update' f.id %}" class="btn btn-primary mt-3 baxodir_account_standart_text">Suratlarni yangilash</a>
+<a href="{% url 'announcement_updates' f.id %}" class="btn btn-primary mt-3 baxodir_account_standart_text">E'lonni yangilash</a>
+<a href="{% url 'announcement_delete' f.id %}" class="btn btn-danger mt-3 baxodir_account_standart_text">E'lonni o'chirish</a>
+</div>
+</div>
+{% endfor %}
+<!-- *************************** -->
+
+</div>
+
+
+</div>
+</div>
+</div>
+
+{% endblock %}
+
